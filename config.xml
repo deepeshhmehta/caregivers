@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns="http://www.w3.org/ns/widgets"  xmlns:gap="http://phonegap.com/ns/1.0" id="com.doctrStage.in" version="0.1.1">
+<widget xmlns="http://www.w3.org/ns/widgets"  xmlns:gap="http://phonegap.com/ns/1.0" id="com.caregivers.in" version="0.1.1">
  
     <name>My Clinic</name>
     <preference name="orientation" value="default" />
@@ -11,7 +11,7 @@
     <gap:platform name="android" />
     
     <description>
-        Doctrs.in
+        Caregivers.arth.tech
     </description> 
 
     <author href="http://www.infinisystem.com" email="support@infiniteit.biz">
