@@ -77,7 +77,7 @@
                                             </div>
                                             <div class="col" ng-if="td.app.mode == 3 || td.app.mode == 4">
                                                 <a ng-if="td.app.status == 0" class="cbtn conduct" confirmed-click="approveAppointment(td.app.id,td.todays_product.id,td.app.mode, td.app.scheduled_start_time, td.app.scheduled_end_time)" ng-confirm-click="Do you really want to approve appointment?" id="{{app.app.id}}"><i class="ion-checkmark"></i> Approve</a> 
-                                                <a ng-if="td.app.status != 0" class="cbtn conduct">Conduct</a>
+                                                <a ng-if="td.app.status != 0" ng-click="showUpdateStatus(td)" class="cbtn conduct">Update Status</a>
                                             </div>
                                         </div>
                                         <!----   ng-if="curTime>=todays_time[$index] && curTime<=todays_end_time[$index]" ui-sref="app.doctor-join({'id': app.appointment_id, 'res': 'json'})"   -->
@@ -144,7 +144,7 @@
                                             </div>
                                             <div class="col" ng-if="app.app.mode == 3 || app.app.mode == 4">
                                                 <a ng-if="app.app.status == 0" class="cbtn conduct" confirmed-click="approveAppointment(app.app.id,app.week_product.id,app.app.mode, app.app.scheduled_start_time, app.app.scheduled_end_time)" ng-confirm-click="Do you really want to approve appointment?" id="{{app.id}}"><i class="ion-checkmark"></i> Approve</a> 
-                                                <a ng-if="app.app.status != 0" class="cbtn conduct">Conduct</a>
+                                                <a ng-if="app.app.status != 0" class="cbtn conduct" ng-click ="showUpdateStatus(app)">Update Status</a>
                                             </div>
                                         </div>
                                     </div>
@@ -209,7 +209,7 @@
                                             </div>
                                             <div class="col" ng-if="app.app.mode == 3 || app.app.mode == 4">
                                                 <a ng-if="app.app.status == 0" class="cbtn conduct" confirmed-click="approveAppointment(app.app.id,app.all_product.id,app.app.mode, app.app.scheduled_start_time, app.app.scheduled_end_time)" ng-confirm-click="Do you really want to approve appointment?" id="{{app.app.id}}"><i class="ion-checkmark"></i> Approve</a> 
-                                                <a ng-if="app.app.status != 0" class="cbtn conduct">Conduct</a>
+                                                <a ng-if="app.app.status != 0" class="cbtn conduct" ng-click ="showUpdateStatus(app)">Update Status</a>
                                             </div>
                                         </div>
                                         <!-------- ng-if="curTime >= all_time[$index] && curTime <= all_end_time[$index]" ui-sref="app.doctor-join({'id': app.id, 'res': 'json'})"   -->
@@ -260,3 +260,38 @@
         </ion-modal-view>
     </script>
 </ion-view>
+<script id="update-status" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar app-top-bar">
+                <h1 class="title">Actions</h1>
+                <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
+            </ion-header-bar>
+            <ion-content>
+                <div class="row" >
+                    <div class="col">
+                        <div class="custombtn" ng-controller="CloseModalCtrl" ng-click="statusChanged(3)" > Consulted</div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col">
+                        <div class="custombtn" ng-controller="CloseModalCtrl" ng-click="statusChanged(5)" > Cancelled by Patient</div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col">
+                        <div class="custombtn" ng-controller="CloseModalCtrl" ng-click="statusChanged(8)" > Cancelled by Doctor</div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col">
+                        <div class="custombtn" ng-controller="CloseModalCtrl" ng-click="statusChanged(6)" > Patient didnt show</div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col"><!--ng-click="modalclose('app.external-video-article')"-->
+                        <div class="custombtn" ng-controller="CloseModalCtrl" ng-click="statusChanged(7)" > Doctor didnt show</div>
+                    </div>
+                </div>
+            </ion-content>
+        </ion-modal-view>
+    </script>

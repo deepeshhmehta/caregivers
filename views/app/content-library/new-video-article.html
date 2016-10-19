@@ -39,10 +39,10 @@
                 </select>
 
                 <div class="list"> </div>
-				<div class="footerspacer"></div>
-				
-				
-            </div>	
+                <div class="footerspacer"></div>
+                
+                
+            </div>  
 
             <div class="notetab mrl2" id="tabtwo" style="display:none;" >
                 <div class="fltr-mesg" > <span><strong>Recording:</strong> {{recording}}</span> &nbsp <span><strong>Time:</strong> {{result}}</span> </div>
@@ -51,15 +51,17 @@
                 </div>
 
                 <div class="videoscreen">
-					<div class="vbtn">
-                                            <button type="button"  ng-click="playVideoPreview(aid)" >
-                            <i class="ion-play f20"></i> <br/>View
+                    <div class="vbtn">
+                                            <button type="button"  ng-click="playVideoPreview(aid)" disabled>
+                            <i class="ion-play f20"></i> <!-- <br/>View -->
                         </button>
-					</div>  
+                        <br>
+                        <span><strong>Your video has been recorded</strong></span>
+                    </div>  
 
                 </div> 
 
-            </div>	
+            </div>  
 
             <div class="notetab mt60 mrl2" id="tabthree" style="display:none;" >
                 <div class="item item-divider mt15">Category {{catchoice}}</div>
@@ -70,7 +72,7 @@
                 <ion-list>
                     <ion-checkbox ng-model="langchoice" ng-checked="lang.id == 1"  name="langchoice[]" ng-repeat="lang in languages" ng-value="{{lang.id}}">{{lang.language | capitalize}}</ion-checkbox>
                 </ion-list>
-            </div>	
+            </div>  
 
         </ion-content>
         <div class="footerbar">
@@ -79,7 +81,7 @@
                 <div class="fixedbar row tbtn active brd0" rel="tabone">
                     <div class="col button btn-share" ng-click="tabclick('tabtwo')" ng-disabled="addNewVideoArticle.title.$invalid || addNewVideoArticle.desc.$invalid || addNewVideoArticle.sharewith.$invalid">Next</div>
                 </div>
-				
+                
                 <div class="fixedbar row tbtn" rel="tabtwo">
                     <div class="col  button btn-share btn-add start brd0 hide" ng-click="recordVideo()"><i class="ion-record"></i> Start Recording</div>
 
@@ -105,17 +107,17 @@
 <script id="viewvideo" type="text/ng-template">
     <ion-modal-view>
     <ion-header-bar class="bar app-top-bar">
-    <h1 class="title">View Recording</h1>	 
+    <h1 class="title">View Recording</h1>    
     <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
     </ion-header-bar>
     <ion-content>
 <iframe  class="iframevideo"  frameborder="0" allowfullscreen="1" ng-src="{{trustSrc(playurl)}}"></iframe>
 
-	<!-- <video width="100%" style="min-height:50px;" controls autoplay>
-						  <source src="{{trustSrc(playurl)}}" type="video/mp4">
-						  <source src="{{trustSrc(playurl)}}" type="video/ogg">
-						  Your browser does not support the video tag.
-						</video>  -->
+    <!-- <video width="100%" style="min-height:50px;" controls autoplay>
+                          <source src="{{trustSrc(playurl)}}" type="video/mp4">
+                          <source src="{{trustSrc(playurl)}}" type="video/ogg">
+                          Your browser does not support the video tag.
+                        </video>  -->
 
     </ion-content>
 
