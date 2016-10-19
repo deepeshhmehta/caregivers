@@ -2684,9 +2684,9 @@ angular.module('your_app_name.controllers', [])
                 scope: $scope
             }).then(function (modal) {
                 $scope.filemodal = modal;
-                $scope.showRecAttach = function (apath, aname) {
+                $scope.showRecAttach = function (ahost, apath, aname) {
                     //alert(apath + "======" + aname);
-                    $scope.attachValue = domain + 'public' + apath + aname;
+                    $scope.attachValue = ahost + apath + aname;
                     //$('#recattach').modal('show');
                     $scope.filemodal.show();
                 };
@@ -3048,9 +3048,9 @@ angular.module('your_app_name.controllers', [])
                 scope: $scope
             }).then(function (modal) {
                 $scope.filemodal = modal;
-                $scope.showRecAttach = function (apath, aname) {
+                $scope.showRecAttach = function (ahost, apath, aname) {
                     //alert(apath + "======" + aname);
-                    $scope.attachValue = domain + 'public' + apath + aname;
+                    $scope.attachValue = ahost + apath + aname;
                     //$('#recattach').modal('show');
                     $scope.filemodal.show();
                 };
@@ -5528,9 +5528,9 @@ angular.module('your_app_name.controllers', [])
                 scope: $scope
             }).then(function (modal) {
                 $scope.filemodal = modal;
-                $scope.showRecAttach = function (apath, aname) {
-                    //alert(apath + "======" + aname);
-                    $scope.attachValue = domain + 'public' + apath + aname;
+                $scope.showRecAttach = function (ahost, apath, aname) {
+                    //alert(apath + "======" + aname);domain + 'public'
+                    $scope.attachValue =  ahost + apath + aname;
                     //$('#recattach').modal('show');
                     $scope.filemodal.show();
                 };
@@ -11694,9 +11694,9 @@ angular.module('your_app_name.controllers', [])
                 scope: $scope
             }).then(function (modal) {
                 $scope.filemodal = modal;
-                $scope.showRecAttach = function (apath, aname) {
+                $scope.showRecAttach = function (ahost, apath, aname) {
                     //alert(apath + "======" + aname);
-                    $scope.attachValue = domain + 'public' + apath + aname;
+                    $scope.attachValue = ahost + apath + aname;
                     //$('#recattach').modal('show');
                     $scope.filemodal.show();
                 };
@@ -12493,9 +12493,9 @@ angular.module('your_app_name.controllers', [])
                 scope: $scope
             }).then(function (modal) {
                 $scope.filemodal = modal;
-                $scope.showRecAttach = function (apath, aname) {
+                $scope.showRecAttach = function (ahost, apath, aname) {
                     alert(apath + "======" + aname);
-                    $scope.attachValue = domain + 'public' + apath + aname;
+                    $scope.attachValue = ahost + apath + aname;
                     //$('#recattach').modal('show');
                     $scope.filemodal.show();
                 };
@@ -12857,9 +12857,9 @@ angular.module('your_app_name.controllers', [])
                 scope: $scope
             }).then(function (modal) {
                 $scope.filemodal = modal;
-                $scope.showRecAttach = function (apath, aname) {
+                $scope.showRecAttach = function (ahost, apath, aname) {
                     alert(apath + "======" + aname);
-                    $scope.attachValue = domain + 'public' + apath + aname;
+                    $scope.attachValue = ahost + apath + aname;
                     //$('#recattach').modal('show');
                     $scope.filemodal.show();
                 };

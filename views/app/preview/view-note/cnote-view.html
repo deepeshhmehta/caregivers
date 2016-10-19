@@ -79,14 +79,14 @@
                             <span ng-init="selData = (attach.orginial_name).split('.')">
                                 <span ng-if="selData[1] == 'png' || selData[1] == 'gif' || selData[1] == 'jpg' || selData[1] == 'PNG' || selData[1] == 'GIF' || selData[1] == 'JPG'">
                                     <div class="fieldvalue">
-                                        <a  class="filelink" style="cursor: pointer;" ng-click="showRecAttach(attach.attachment_path, attach.orginial_name)" >
+                                        <a  class="filelink" style="cursor: pointer;" ng-click="showRecAttach(attach.host, attach.attachment_path, attach.orginial_name)" >
                                             <span class="ico"><i class="ion-paperclip"></i></span> ({{$index + 1}})
                                         </a>
                                     </div>
                                 </span>
                                 <span ng-if="selData[1] != 'png' && selData[1] != 'gif' && selData[1] != 'jpg' && selData[1] != 'PNG' && selData[1] != 'GIF' && selData[1] != 'JPG'">
                                     <div class="fieldvalue">
-                                        <a class="filelink" href="{{attachpath}}{{attach.attachment_path}}{{attach.orginial_name}}"  download>
+                                        <a class="filelink" href="{{attach.host}}{{attach.attachment_path}}{{attach.orginial_name}}"  download>
                                             <span class="ico"><i class="ion-paperclip"></i></span> ({{$index + 1}})
                                         </a>
                                     </div>
@@ -225,7 +225,7 @@
     <div class="mcontent mt50">
 
     <div class="viewattachfile vimgheight" ng-repeat="attach in cnAttachments">
-    <img src="{{attachpath}}{{attach.attachment_path}}{{attach.orginial_name}}" style="border-bottom: 1px #eee solid; margin-bottom: 5px; padding: 5px 5px;"/>
+    <img src="{{attach.host}}{{attach.attachment_path}}{{attach.orginial_name}}" style="border-bottom: 1px #eee solid; margin-bottom: 5px; padding: 5px 5px;"/>
     </div>  
     </div>
     </content>
