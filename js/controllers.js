@@ -4047,248 +4047,89 @@ angular.module('your_app_name.controllers', [])
         })
 
         .controller('NewVideoArticleCtrl', function ($scope, $sce, $filter, $http, $state, $timeout, $stateParams, $ionicModal, $ionicLoading, $ionicScrollDelegate) {
-            $ionicLoading.show({template: 'Loading..'});
-            $scope.checkboxval = false;
-            var wh = jQuery(window).height();
-            // jQuery('.mediascreen').css('height', wh - 152);
-            jQuery('.notetab').css('height', wh - 147);
-            jQuery('.videoscreen').css('height', wh - 152);
-            jQuery('.videoscreen').hide();
-            $scope.doctorId = window.localStorage.getItem('id');
-            $scope.sessionId = '';
-            $scope.token = '';
-            $scope.aid = '';
-            $scope.opentok = '';
-            $scope.url = '';
-            $scope.viedoUrl = '';
-            $scope.recording = 'Off';
-//            $scope.timer = '00:00:00';
-            var stoppedTimer;
-            $scope.Timercounter = 0;
-            $scope.category_sources = [];
-            $scope.categoryId = $stateParams.categoryId;
-            $http({
-                method: 'GET',
-                url: domain + 'contentlibrary/get-video-article-details',
-                params: {doctorId: window.localStorage.getItem('id')}
-            }).then(function sucessCallback(response) {
-                console.log(response.data);
-                $scope.category = response.data.category;
-                $scope.catId = response.data.user_cat.catId;
-                $scope.target_groups = response.data.target_groups;
-                $scope.languages = response.data.languages;
-                $ionicLoading.hide();
-            }, function errorCallback(e) {
-                console.log(e);
-            });
-            $scope.submitNewVideoArticle = function () {
-                $scope.from = get('from');
-                $ionicLoading.show({template: 'Adding...'});
-                var data = new FormData(jQuery("#addNewVideoArticle")[0]);
-                callAjax("POST", domain + "contentlibrary/save-video-article", data, function (response) {
-                    console.log(response);
+                $ionicLoading.show({template: 'Loading..'});
+                $scope.checkboxval = false;
+                var wh = jQuery(window).height();
+                // jQuery('.mediascreen').css('height', wh - 152);
+                jQuery('.notetab').css('height', wh - 147);
+                jQuery('.videoscreen').css('height', wh - 152);
+                jQuery('.videoscreen').hide();
+                $scope.doctorId = window.localStorage.getItem('id');
+                $scope.sessionId = '';
+                $scope.token = '';
+                $scope.aid = '';
+                $scope.opentok = '';
+                $scope.url = '';
+                $scope.viedoUrl = '';
+                $scope.recording = 'Off';
+    //            $scope.timer = '00:00:00';
+                var stoppedTimer;
+                $scope.Timercounter = 0;
+                $scope.category_sources = [];
+                $scope.categoryId = $stateParams.categoryId;
+                $http({
+                    method: 'GET',
+                    url: domain + 'contentlibrary/get-video-article-details',
+                    params: {doctorId: window.localStorage.getItem('id')}
+                }).then(function sucessCallback(response) {
+                    console.log(response.data);
+                    $scope.category = response.data.category;
+                    $scope.catId = response.data.user_cat.catId;
+                    $scope.target_groups = response.data.target_groups;
+                    $scope.languages = response.data.languages;
                     $ionicLoading.hide();
-                    if (response == '1') {
-                        $scope.viedoUrl = window.localStorage.removeItem('viedoUrl');
-                        $scope.archiveId = window.localStorage.removeItem('archiveId');
-                        alert('Video Article added sucessfully.');
-                        $state.go('app.content-library', {reload: true});
-                    } else {
-                        $state.go('app.content-library', {reload: true});
-                    }
+                }, function errorCallback(e) {
+                    console.log(e);
                 });
-            };
-
-            $scope.submitNewVideoArticleAws = function () {
-                $scope.from = get('from');
-                $ionicLoading.show({template: 'Adding...'});
-                var data = new FormData(jQuery("#addNewVideoArticle")[0]);
-                callAjax("POST", domain + "contentlibrary/save-video-article-to-aws", data, function (response) {
-                    console.log(response);
-                    $ionicLoading.hide();
-                    if (response == '1') {
-                        $scope.viedoUrl = window.localStorage.removeItem('viedoUrl');
-                        $scope.archiveId = window.localStorage.removeItem('archiveId');
-                        alert('Video Article added sucessfully.');
-                        $state.go('app.content-library', {reload: true});
-                    } else {
-                        $state.go('app.content-library', {reload: true});
-                    }
-                });
-            };
-
-            $scope.tabclick = function (taburl) {
-                $ionicScrollDelegate.resize();
-                $ionicScrollDelegate.scrollTop();
-                jQuery('.notetab').hide();
-                jQuery('#' + taburl).show();
-                console.log(taburl + 'fasdfa');
-                jQuery('.headtab span').removeClass('active');
-                jQuery('.tab-buttons .tbtn').removeClass('active');
-                jQuery('.headtab span[rel="' + taburl + '"]').addClass('active');
-                jQuery('.tab-buttons .tbtn[rel="' + taburl + '"]').addClass('active');
-                if (taburl == 'tabtwo')
-                {
-                    jQuery('.videoscreen').hide();
-                    $scope.doctorId = window.localStorage.getItem('id');
-                    $http({
-                        method: 'GET',
-                        url: domain + 'contentlibrary/get-video-start',
-                        params: {doctorId: window.localStorage.getItem('id')}
-                    }).then(function sucessCallback(response) {
-                        console.log(response.data);
-                        var aid = '';
-                        var apiKey = '45121182';
-                        var sessionId = response.data.sessionId;
-                        var token = response.data.oToken;
-                        $scope.sessionId = response.data.sessionId;
-                        $scope.token = response.data.oToken;
-                        $scope.opentok = response.data.opentok;
-                        if (OT.checkSystemRequirements() == 1) {
-                            session = OT.initSession(apiKey, sessionId);
-                            $ionicLoading.hide();
+                $scope.submitNewVideoArticle = function () {
+                    $scope.from = get('from');
+                    $ionicLoading.show({template: 'Adding...'});
+                    var data = new FormData(jQuery("#addNewVideoArticle")[0]);
+                    callAjax("POST", domain + "contentlibrary/save-video-article", data, function (response) {
+                        console.log(response);
+                        $ionicLoading.hide();
+                        if (response == '1') {
+                            $scope.viedoUrl = window.localStorage.removeItem('viedoUrl');
+                            $scope.archiveId = window.localStorage.removeItem('archiveId');
+                            alert('Video Article added sucessfully.');
+                            $state.go('app.content-library', {reload: true});
                         } else {
-                            $ionicLoading.hide();
-                            alert("Your device is not compatible");
+                            $state.go('app.content-library', {reload: true});
                         }
-
-
-                        session.on({
-                            streamCreated: function (event) {
-                                subscriber = session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "replace", width: "100%", height: "100%"});
-                                console.log('Frame rates' + event.stream.frameRate);
-                            },
-                            sessionDisconnected: function (event) {
-                                if (event.reason === 'networkDisconnected') {
-                                    alert('You lost your internet connection.'
-                                            + 'Please check your connection and try connecting again.');
-                                }
-                            }
-                        });
-                        session.connect(token, function (error) {
-                            if (error) {
-                                console.log(error.message);
-                            } else {
-                                jQuery('.start').show();
-                                publisher = OT.initPublisher('subscribersDiv', {width: "100%", height: "100%"});
-                                session.publish(publisher);
-//                                publisher.on('streamCreated', function (event) {
-//                                    console.log('Frame rate: ' + event.stream.frameRate);
-//                                });
-                                var mic = 1;
-                                var mute = 1;
-                                jQuery(".muteMic").click(function () {
-                                    if (mic == 1) {
-                                        publisher.publishAudio(false);
-                                        mic = 0;
-                                    } else {
-                                        publisher.publishAudio(true);
-                                        mic = 1;
-                                    }
-                                });
-                                jQuery(".muteSub").click(function () {
-                                    if (mute == 1) {
-                                        subscriber.subscribeToAudio(false);
-                                        mute = 0;
-                                    } else {
-                                        subscriber.subscribeToAudio(true);
-                                        mute = 1;
-                                    }
-                                });
-                            }
-                        });
-                    }, function errorCallback(e) {
-                        console.log(e);
                     });
-                    $scope.recordVideo = function () {
-                        $scope.Timercounter = 0;
-                        $scope.onTimeout = function () {
-                            stoppedTimer = $timeout(function () {
-                                $scope.Timercounter++;
-                                $scope.seconds = $scope.Timercounter % 60;
-                                $scope.minutes = Math.floor($scope.Timercounter / 60);
-                                //  var mytimeout = $timeout($scope.onTimeout, 1000);
-                                $scope.result = ($scope.minutes < 10 ? "0" + $scope.minutes : $scope.minutes);
-                                $scope.result += ":" + ($scope.seconds < 10 ? "0" + $scope.seconds : $scope.seconds);
-                                $scope.onTimeout();
-                            }, 1000)
+                };
+                
+                $scope.submitNewVideoArticleAws = function () {
+                    $scope.from = get('from');
+                    $ionicLoading.show({template: 'Adding...'});
+                    var data = new FormData(jQuery("#addNewVideoArticle")[0]);
+                    callAjax("POST", domain + "contentlibrary/save-video-article-to-aws", data, function (response) {
+                        console.log(response);
+                        $ionicLoading.hide();
+                        if (response == '1') {
+                            $scope.viedoUrl = window.localStorage.removeItem('viedoUrl');
+                            $scope.archiveId = window.localStorage.removeItem('archiveId');
+                            alert('Video Article added sucessfully.');
+                            $state.go('app.content-library', {reload: true});
+                        } else {
+                            $state.go('app.content-library', {reload: true});
                         }
+                    });
+                };
 
-                        $timeout(function () {
-                            $scope.onTimeout();
-                        }, 0);
-                        $scope.recording = 'On';
-                        jQuery('.start').hide();
-                        jQuery('.stop').show();
+                $scope.tabclick = function (taburl) {
+                    $ionicScrollDelegate.resize();
+                    $ionicScrollDelegate.scrollTop();
+                    jQuery('.notetab').hide();
+                    jQuery('#' + taburl).show();
+                    console.log(taburl + 'fasdfa');
+                    jQuery('.headtab span').removeClass('active');
+                    jQuery('.tab-buttons .tbtn').removeClass('active');
+                    jQuery('.headtab span[rel="' + taburl + '"]').addClass('active');
+                    jQuery('.tab-buttons .tbtn[rel="' + taburl + '"]').addClass('active');
+                    if (taburl == 'tabtwo')
+                    {
                         jQuery('.videoscreen').hide();
-                        jQuery('.mediascreen').show();
-                        jQuery('.next').hide();
-                        jQuery('.rerecording').hide();
-                        $http({
-                            method: 'GET',
-                            url: domain + 'contentlibrary/get-recording-start',
-                            params: {archive: 1, sessionId: $scope.sessionId}
-                        }).then(function sucessCallback(response) {
-                            $scope.aid = response.data;
-                        }, function errorCallback(e) {
-                            console.log(e);
-                        });
-                    };
-                    $scope.recordingStop = function () {
-                        //alert('stoppedTimer ' + stoppedTimer);
-                        // alert($scope.Timercounter);
-                        $timeout.cancel(stoppedTimer);
-                        publisher.destroy();
-                        $scope.recording = 'Off';
-                        jQuery('.stop').hide();
-                        jQuery('.mediascreen').hide();
-                        jQuery('.start').hide();
-                        jQuery('.videoscreen').show();
-                        jQuery('.next').show();
-                        jQuery('.rerecording').show();
-                        $scope.from = get('from');
-                        var data = new FormData(jQuery("#addNewVideoArticle")[0]);
-                        callAjax("POST", domain + "contentlibrary/add-video-article", data, function (response) {
-                            console.log('entry done');
-                        });
-                        $http({
-                            method: 'GET',
-                            url: domain + 'contentlibrary/recording-stop',
-                            params: {archiveStop: 1, archiveId: $scope.aid}
-                        }).then(function sucessCallback(response) {
-                            console.log(response.data);
-                            // $scope.playVideo($scope.aid); // recursive call function
-//                            $http({
-//                                method: 'GET',
-//                                url: domain + 'contentlibrary/recording-response',
-//                                params: {archiveId: $scope.aid}
-//                            }).then(function sucessCallback(response) {
-//                                console.log(response.data);
-//                                $scope.url = response.data.url;
-//                                window.localStorage.setItem('viedoUrl', $scope.url);
-//                                window.localStorage.setItem('archiveId', $scope.aid);
-//
-//
-//                            }, function errorCallback(e) {
-//                                console.log(e);
-//                            });
-
-
-
-                        }, function errorCallback(e) {
-                            console.log(e);
-                        });
-                    }
-
-                    $scope.reRecording = function () {
-
-                        $scope.Timercounter = 0;
-                        jQuery('.videoscreen').hide();
-                        jQuery('.mediascreen').show();
-                        jQuery('.mediascreen').html('<div id="subscribersDiv" class="subscribediv">Initializing Video</div>');
-                        jQuery('.next').hide();
-                        jQuery('.rerecording').hide();
-                        jQuery('.stop').hide();
                         $scope.doctorId = window.localStorage.getItem('id');
                         $http({
                             method: 'GET',
@@ -4297,7 +4138,7 @@ angular.module('your_app_name.controllers', [])
                         }).then(function sucessCallback(response) {
                             console.log(response.data);
                             var aid = '';
-                            var apiKey = '45121182';
+                            var apiKey = response.data.apikey;
                             var sessionId = response.data.sessionId;
                             var token = response.data.oToken;
                             $scope.sessionId = response.data.sessionId;
@@ -4310,9 +4151,12 @@ angular.module('your_app_name.controllers', [])
                                 $ionicLoading.hide();
                                 alert("Your device is not compatible");
                             }
+
+
                             session.on({
                                 streamCreated: function (event) {
                                     subscriber = session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "replace", width: "100%", height: "100%"});
+                                    console.log('Frame rates' + event.stream.frameRate);
                                 },
                                 sessionDisconnected: function (event) {
                                     if (event.reason === 'networkDisconnected') {
@@ -4325,84 +4169,257 @@ angular.module('your_app_name.controllers', [])
                                 if (error) {
                                     console.log(error.message);
                                 } else {
-                                    // console.log("jhjagsdjagdhj");
+                                    jQuery('.start').show();
                                     publisher = OT.initPublisher('subscribersDiv', {width: "100%", height: "100%"});
                                     session.publish(publisher);
-                                    jQuery('.start').show();
-//                                    publisher.on('streamCreated', function (event) {
-//                                        console.log('Frame rate rerecording: ' + event.stream.frameRate);
-//                                    });
-//                                    var mic = 1;
-//                                    var mute = 1;
-//                                    jQuery(".muteMic").click(function () {
-//                                        if (mic == 1) {
-//                                            publisher.publishAudio(false);
-//                                            mic = 0;
-//                                        } else {
-//                                            publisher.publishAudio(true);
-//                                            mic = 1;
-//                                        }
-//                                    });
-//                                    jQuery(".muteSub").click(function () {
-//                                        if (mute == 1) {
-//                                            subscriber.subscribeToAudio(false);
-//                                            mute = 0;
-//                                        } else {
-//                                            subscriber.subscribeToAudio(true);
-//                                            mute = 1;
-//                                        }
-//                                    });
+    //                                publisher.on('streamCreated', function (event) {
+    //                                    console.log('Frame rate: ' + event.stream.frameRate);
+    //                                });
+                                    var mic = 1;
+                                    var mute = 1;
+                                    jQuery(".muteMic").click(function () {
+                                        if (mic == 1) {
+                                            publisher.publishAudio(false);
+                                            mic = 0;
+                                        } else {
+                                            publisher.publishAudio(true);
+                                            mic = 1;
+                                        }
+                                    });
+                                    jQuery(".muteSub").click(function () {
+                                        if (mute == 1) {
+                                            subscriber.subscribeToAudio(false);
+                                            mute = 0;
+                                        } else {
+                                            subscriber.subscribeToAudio(true);
+                                            mute = 1;
+                                        }
+                                    });
                                 }
                             });
                         }, function errorCallback(e) {
                             console.log(e);
                         });
-                    };
-
-                    $scope.trustSrc = function (src) {
-                        return $sce.trustAsResourceUrl($filter('split')(src, '?', 0));
-                    };
-
-                    $ionicModal.fromTemplateUrl('viewvideo', {
-                        scope: $scope
-                    }).then(function (modal) {
-                        $scope.modal = modal;
-                    });
-                    $scope.playVideo = function (archiveid) {
-                        $ionicLoading.show({template: 'Preparing Video...'});
-                        $http({
-                            method: 'GET',
-                            url: domain + 'contentlibrary/play-recent-video',
-                            params: {archiveId: archiveid}
-                        }).then(function sucessCallback(response) {
-                            console.log(response.data);
-                            //alert(response.data);
-                            $scope.playurl = response.data;
-                            if ($scope.playurl != '') {
-                                $ionicLoading.hide();
-                                // $scope.modal.show();
-                            } else {
-                                $scope.playVideo(archiveid);
+                        $scope.recordVideo = function () {
+                            $scope.Timercounter = 0;
+                            $scope.onTimeout = function () {
+                                stoppedTimer = $timeout(function () {
+                                    $scope.Timercounter++;
+                                    $scope.seconds = $scope.Timercounter % 60;
+                                    $scope.minutes = Math.floor($scope.Timercounter / 60);
+                                    //  var mytimeout = $timeout($scope.onTimeout, 1000);
+                                    $scope.result = ($scope.minutes < 10 ? "0" + $scope.minutes : $scope.minutes);
+                                    $scope.result += ":" + ($scope.seconds < 10 ? "0" + $scope.seconds : $scope.seconds);
+                                    $scope.onTimeout();
+                                }, 1000)
                             }
-                        }, function errorCallback(e) {
-                            console.log(e);
+
+                            $timeout(function () {
+                                $scope.onTimeout();
+                            }, 0);
+                            $scope.recording = 'On';
+                            jQuery('.start').hide();
+                            jQuery('.stop').show();
+                            jQuery('.videoscreen').hide();
+                            jQuery('.mediascreen').show();
+                            jQuery('.next').hide();
+                            jQuery('.rerecording').hide();
+                            $http({
+                                method: 'GET',
+                                url: domain + 'contentlibrary/get-recording-start',
+                                params: {archive: 1, sessionId: $scope.sessionId, doctorId: window.localStorage.getItem('id')}
+                            }).then(function sucessCallback(response) {
+                                $scope.aid = response.data;
+                            }, function errorCallback(e) {
+                                console.log(e);
+                            });
+                        };
+                        $scope.recordingStop = function () {
+                            //alert('stoppedTimer ' + stoppedTimer);
+                            // alert($scope.Timercounter);
+                            $timeout.cancel(stoppedTimer);
+                            publisher.destroy();
+                            $scope.recording = 'Off';
+                            jQuery('.stop').hide();
+                            jQuery('.mediascreen').hide();
+                            jQuery('.start').hide();
+                            jQuery('.videoscreen').show();
+                            jQuery('.next').show();
+                            jQuery('.rerecording').show();
+                            $scope.from = get('from');                        
+                            var data = new FormData(jQuery("#addNewVideoArticle")[0]);
+                            callAjax("POST", domain + "contentlibrary/add-video-article", data, function (response) {
+                                console.log('entry done');
+                            });
+                            $http({
+                                method: 'GET',
+                                url: domain + 'contentlibrary/recording-stop',
+                                params: {archiveStop: 1, archiveId: $scope.aid, doctorId: window.localStorage.getItem('id')}
+                            }).then(function sucessCallback(response) {
+                                console.log(response.data);
+                               // $scope.playVideo($scope.aid); // recursive call function
+    //                            $http({
+    //                                method: 'GET',
+    //                                url: domain + 'contentlibrary/recording-response',
+    //                                params: {archiveId: $scope.aid}
+    //                            }).then(function sucessCallback(response) {
+    //                                console.log(response.data);
+    //                                $scope.url = response.data.url;
+    //                                window.localStorage.setItem('viedoUrl', $scope.url);
+    //                                window.localStorage.setItem('archiveId', $scope.aid);
+    //
+    //
+    //                            }, function errorCallback(e) {
+    //                                console.log(e);
+    //                            });
+
+
+
+                            }, function errorCallback(e) {
+                                console.log(e);
+                            });
+                        }
+
+                        $scope.reRecording = function () {
+
+                            $scope.Timercounter = 0;
+                            jQuery('.videoscreen').hide();
+                            jQuery('.mediascreen').show();
+                            jQuery('.mediascreen').html('<div id="subscribersDiv" class="subscribediv">Initializing Video</div>');
+                            jQuery('.next').hide();
+                            jQuery('.rerecording').hide();
+                            jQuery('.stop').hide();
+                            $scope.doctorId = window.localStorage.getItem('id');
+                            $http({
+                                method: 'GET',
+                                url: domain + 'contentlibrary/get-video-start',
+                                params: {doctorId: window.localStorage.getItem('id')}
+                            }).then(function sucessCallback(response) {
+                                console.log(response.data);
+                                var aid = '';
+                                var apiKey = response.data.apikey;
+                                var sessionId = response.data.sessionId;
+                                var token = response.data.oToken;
+                                $scope.sessionId = response.data.sessionId;
+                                $scope.token = response.data.oToken;
+                                $scope.opentok = response.data.opentok;
+                                if (OT.checkSystemRequirements() == 1) {
+                                    session = OT.initSession(apiKey, sessionId);
+                                    $ionicLoading.hide();
+                                } else {
+                                    $ionicLoading.hide();
+                                    alert("Your device is not compatible");
+                                }
+                                session.on({
+                                    streamCreated: function (event) {
+                                        subscriber = session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "replace", width: "100%", height: "100%"});
+                                    },
+                                    sessionDisconnected: function (event) {
+                                        if (event.reason === 'networkDisconnected') {
+                                            alert('You lost your internet connection.'
+                                                    + 'Please check your connection and try connecting again.');
+                                        }
+                                    }
+                                });
+                                session.connect(token, function (error) {
+                                    if (error) {
+                                        console.log(error.message);
+                                    } else {
+                                        // console.log("jhjagsdjagdhj");
+                                        publisher = OT.initPublisher('subscribersDiv', {width: "100%", height: "100%"});
+                                        session.publish(publisher);
+                                        jQuery('.start').show();
+    //                                    publisher.on('streamCreated', function (event) {
+    //                                        console.log('Frame rate rerecording: ' + event.stream.frameRate);
+    //                                    });
+    //                                    var mic = 1;
+    //                                    var mute = 1;
+    //                                    jQuery(".muteMic").click(function () {
+    //                                        if (mic == 1) {
+    //                                            publisher.publishAudio(false);
+    //                                            mic = 0;
+    //                                        } else {
+    //                                            publisher.publishAudio(true);
+    //                                            mic = 1;
+    //                                        }
+    //                                    });
+    //                                    jQuery(".muteSub").click(function () {
+    //                                        if (mute == 1) {
+    //                                            subscriber.subscribeToAudio(false);
+    //                                            mute = 0;
+    //                                        } else {
+    //                                            subscriber.subscribeToAudio(true);
+    //                                            mute = 1;
+    //                                        }
+    //                                    });
+                                    }
+                                });
+                            }, function errorCallback(e) {
+                                console.log(e);
+                            });
+                        };
+
+                        $scope.trustSrc = function (src) {
+                            return $sce.trustAsResourceUrl($filter('split')(src, '?', 0));
+                        };
+
+                        $ionicModal.fromTemplateUrl('viewvideo', {
+                            scope: $scope
+                        }).then(function (modal) {
+                            $scope.modal = modal;
                         });
-                    };
+                        $scope.playVideo = function (archiveid) {
+                            $ionicLoading.show({template: 'Preparing Video...'});
+                            $http({
+                                method: 'GET',
+                                url: domain + 'contentlibrary/play-recent-video',
+                                params: {archiveId: archiveid}
+                            }).then(function sucessCallback(response) {
+                                console.log(response.data);
+                                //alert(response.data);
+                                $scope.playurl = response.data;
+                                if ($scope.playurl != '') {
+                                    $ionicLoading.hide();
+                                    // $scope.modal.show();
+                                } else {
+                                    $scope.playVideo(archiveid);
+                                }
+                            }, function errorCallback(e) {
+                                console.log(e);
+                            });
+                        };
+                        $scope.checkaws = function(val){
+                            $scope.awsflag = 0;
+                            $http({
+                                        method: 'GET',
+                                        url: domain + 'contentlibrary/check-aws',
+                                        params: {archiveId: val}
+                                    }).then(function sucessCallback(response) {
+                                        $scope.awsflag = response.data.awsflag;
+                                        $scope.playurl = response.data.playurl;
+                                        if($scope.awsflag == 1){
+                                            $scope.playVideoPreview(val);
+                                        }else{
+                                            alert(val + ' your message here');
+                                        }
+                                    });
+                            //get request to check if scope.awsflag is set ""
+                            
+                        }
+                        $scope.playVideoPreview = function () {
+                            $scope.modal.show();
+                        };
+                    }
+                };
 
-                    $scope.playVideoPreview = function () {
-                        $scope.modal.show();
-                    };
+                $scope.isChecked = function () {
+                    if (jQuery("input[type='checkbox']:checked").length)
+                    {
+                        $scope.checkboxval = false;
+                    } else {
+                        $scope.checkboxval = true;
+                    }
                 }
-            };
-
-            $scope.isChecked = function () {
-                if (jQuery("input[type='checkbox']:checked").length)
-                {
-                    $scope.checkboxval = false;
-                } else {
-                    $scope.checkboxval = true;
-                }
-            }
 
 
         })
