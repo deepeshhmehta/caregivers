@@ -11,6 +11,26 @@ angular.module('your_app_name.controllers', [])
                 $rootScope.userimage = window.localStorage.getItem('image');
             }
         })
+        
+              angular.module('PasswordConfirm', []).directive('changePasswordC', function () {
+    //console.log("hgjhfjhfjh");
+    return {
+        require: 'ngModel',
+        link: function (scope, elm, attrs, ctrl) {
+
+            ctrl.$setValidity('noMatch1', true);
+
+            attrs.$observe('changePasswordC', function (newVal) {
+                // console.log("vnvnbv" + newVal);
+                if (newVal === 'true') {
+                    ctrl.$setValidity('noMatch1', true);
+                } else {
+                    ctrl.$setValidity('noMatch1', false);
+                }
+            });
+        }
+    }
+})
         // APP
         .controller('AppCtrl', function ($scope, $http, $state, $ionicConfig, $rootScope, $ionicLoading, $timeout, $ionicHistory) {
             $rootScope.imgpath = domain + "/public/frontend/user/";
@@ -156,6 +176,37 @@ angular.module('your_app_name.controllers', [])
             });
         })
 
+      .controller('ChangePasswordCtrl', function ($scope, $state, $ionicLoading) {
+            $scope.email = window.localStorage.getItem('email');
+            $scope.userId = window.localStorage.getItem('id');
+            $scope.interface = window.localStorage.getItem('interface_id');
+             $scope.user = {};
+            $scope.user.oldpassword = '';
+            $scope.user.password = '';
+            $scope.user.cpassword = '';
+            console.log($scope.userId + '--' + $scope.email + "****" + $scope.interface);
+            $scope.doChangepassword = function () {
+                $.ajax({
+                    type: 'GET',
+                    url: domain + "change-password",
+                    data: {userId: $scope.userId, email: $scope.email, interface: $scope.interface, oldpassword: $scope.user.oldpassword, password: $scope.user.password},
+                    cache: false,
+                    success: function (response) {
+                        if (response == 1) {
+                            alert('Password updated successfully.');
+                            $state.go('app.doctor-settings-new',  {reload: true});
+                        } else if (response == 2) {
+                            alert('Old password incorrect.');
+                        } else {
+                            alert('Password update unsuccessfully. Please try again!');
+                        }
+                        
+
+                    }
+                });
+            }
+
+        })
         .controller('EvaluationCtrl', function ($scope, $http, $stateParams, $ionicModal) {
             $scope.category_sources = [];
             $scope.categoryId = $stateParams.categoryId;

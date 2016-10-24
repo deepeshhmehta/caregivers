@@ -25,7 +25,8 @@ angular.module('your_app_name', [
     'slugifier',
     'ionic.contrib.ui.tinderCards',
     'jett.ionic.filter.bar',
-    'youtube-embed'
+    'youtube-embed',
+    'PasswordConfirm'
 ])
         .run(function ($ionicPlatform, $state, $http, $rootScope, $ionicConfig, $timeout, $ionicLoading) {
            document.addEventListener("offline", onOffline, false);
@@ -319,6 +320,17 @@ angular.module('your_app_name', [
                             'menuContent': {
                                 templateUrl: "views/app/doctor-settings-new.html",
                                 controller: 'DoctorSettingsNewCtrl'
+                            }
+                        }
+                    })
+                     .state('app.change-password', {
+                        url: "/change-password",
+                        views: {
+                            'menuContent': {
+                                templateUrl: function () {
+                                    return "views/app/change-password.html";
+                                },
+                                controller: 'ChangePasswordCtrl'
                             }
                         }
                     })
