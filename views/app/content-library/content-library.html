@@ -38,9 +38,9 @@
 
 
         <div class="posts-list" ng-if="clab != ''">
-            <div ng-repeat="contentLab in clab" class="list card post-item" ng-class="contentLab.content_type=='External video'? 'bluebox':(contentLab.content_type=='video'? 'greenbox':'greenbox')"  >
+            <div ng-repeat="contentLab in clab" class="list card post-item" ng-class="contentLab.source=='Exteral'? 'bluebox':'greenbox'"  >
                 <a ui-sref="app.view-content-value({'id': contentLab.id})" class="card-content p0">
-                    <div class="row post-heading item item-text-wrap "  ng-class="(contentLab.content_type=='External video'|| contentLab.content_type=='video')?'fillbg':''" >
+                    <div class="row post-heading item item-text-wrap "  ng-class="(contentLab.content_type=='video')?'fillbg':''" >
                         <div class="col col-75">
                             <h2 class="post-title">{{contentLab.content_title| capitalize}}</h2>
                             <p class="post-author">
@@ -48,11 +48,11 @@
                             </p>
                         </div>
                         <div class="col col-25 ">
-                            <div ng-if="contentLab.content_type == 'External video'" class="indicater txt-center video">
+                            <div ng-if="(contentLab.content_type == 'video')&&(contentLab.source == 'Exteral')" class="indicater txt-center video">
                                 <i class="icon ion-ios-videocam f20"></i>
                                 <br/> 
                             </div>
-                            <div ng-if="contentLab.content_type == 'video'" class="indicater txt-center video">
+                            <div ng-if="((contentLab.content_type == 'video')&&(contentLab.source == 'ugc'))" class="indicater txt-center video">
                                 <i class="icon ion-ios-videocam f20"></i>
                                 <br/> {{contentLab.duration | timesec}}
                             </div>
