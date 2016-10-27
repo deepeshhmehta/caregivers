@@ -1676,6 +1676,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('VideoBroadcastInteractiveCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter) {
             $scope.exitInitiated = 0;
+            $scope.hideText = 1;
             $scope.exitcalled = 0;
             $scope.session = '';
             $scope.subscriber;
@@ -1708,6 +1709,7 @@ angular.module('your_app_name.controllers', [])
                                         streamCreated: function (event) {
                                             console.log('stream created....');
                                             $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "append"});
+                                            $scope.hideText = 0;
                                             //  $http({
                                             //         method: 'GET',
                                             //         url: domain + 'video-broadcast-get-hls', 
@@ -1719,8 +1721,7 @@ angular.module('your_app_name.controllers', [])
                                             //                  jQuery('#iframe_player').attr('src',$scope.hlsLink);
                                                             
                                             //             })       
-                                            console.log('suscriber');
-                                            console.log($scope.subscriber);
+                                            jQuery("#hideText").hide();
 
                                             
                                         },
