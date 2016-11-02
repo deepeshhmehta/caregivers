@@ -1526,7 +1526,7 @@ angular.module('your_app_name.controllers', [])
 
 
         })
-.controller('VideoBroadcastStreamCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter) {
+.controller('VideoBroadcastStreamCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter,$ionicHistory) {
             $scope.exitInitiated = 0;
             $scope.exitcalled = 0;
             $scope.session = '';
@@ -1536,6 +1536,9 @@ angular.module('your_app_name.controllers', [])
             $scope.startbroadcast=$stateParams.publish;
             $scope.sessionID =$stateParams.session_id;
             $scope.hlsLink='';
+            
+            $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+            $ionicHistory.clearHistory();
             
             $scope.initialiseSession = function(sessionId){
                 console.log('initialiseSession started');
@@ -1674,7 +1677,7 @@ angular.module('your_app_name.controllers', [])
             
         })
 
-        .controller('VideoBroadcastInteractiveCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter) {
+        .controller('VideoBroadcastInteractiveCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter,$ionicHistory) {
             $scope.exitInitiated = 0;
             $scope.hideText = 1;
             $scope.exitcalled = 0;
@@ -1685,6 +1688,9 @@ angular.module('your_app_name.controllers', [])
             $scope.startbroadcast=$stateParams.publish;
             $scope.sessionID =$stateParams.session_id;
             $scope.hlsLink='';
+
+            $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+            $ionicHistory.clearHistory();
             
             $scope.initialiseSession = function(sessionId){
                 console.log('initialiseSession started');
@@ -1713,7 +1719,7 @@ angular.module('your_app_name.controllers', [])
                                         streamCreated: function (event) {
                                             console.log('stream created....');
                                             if($scope.startbroadcast == 1){
-                                                $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "replace"});
+                                                $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "replace", width: "100%", height: "100%"});
                                             }else if($scope.startbroadcast == 0){
                                                 $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "append"});
                                             }
