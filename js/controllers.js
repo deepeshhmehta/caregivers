@@ -1712,7 +1712,11 @@ angular.module('your_app_name.controllers', [])
                                         },
                                         streamCreated: function (event) {
                                             console.log('stream created....');
-                                            $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "append"});
+                                            if($scope.startbroadcast == 1){
+                                                $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "replace"});
+                                            }else if($scope.startbroadcast == 0){
+                                                $scope.subscriber = $scope.session.subscribe(event.stream, 'subscribersDiv', {subscribeToAudio: true, insertMode: "append"});
+                                            }
                                             $scope.hideText = 0;
                                             //  $http({
                                             //         method: 'GET',
