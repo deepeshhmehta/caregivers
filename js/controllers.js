@@ -1426,7 +1426,7 @@ angular.module('your_app_name.controllers', [])
             }
         })
 
-        .controller('VideoBroadcastCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
+        .controller('VideoBroadcastCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter, $ionicHistory) {
             $ionicModal.fromTemplateUrl('create-library', {
                 scope: $scope
             }).then(function (modal) {
@@ -1492,8 +1492,12 @@ angular.module('your_app_name.controllers', [])
                     console.log("startBC: " + $scope.startbroadcast);
                     console.log('successfully generated token');
                     if (response.data.type == 1) {
+                        $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+                        $ionicHistory.clearHistory();
                         $state.go('app.video-broadcast-stream', {'session_id': $scope.session_id, 'token': $scope.token, 'publish': $scope.startbroadcast});
                     } else {
+                        $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
+                        $ionicHistory.clearHistory();
                         $state.go('app.video-broadcast-interactive', {'session_id': $scope.session_id, 'token': $scope.token, 'publish': $scope.startbroadcast});
                     }
                 });
@@ -1689,6 +1693,7 @@ angular.module('your_app_name.controllers', [])
             $scope.sessionID =$stateParams.session_id;
             $scope.hlsLink='';
 
+            
             $ionicHistory.nextViewOptions({disableBack: true, historyRoot: true});
             $ionicHistory.clearHistory();
             
