@@ -1688,6 +1688,7 @@ angular.module('your_app_name.controllers', [])
             
             $scope.initialiseSession = function(sessionId){
                 console.log('initialiseSession started');
+                
                 $http({
                         method: 'GET',
                         url: domain + 'get-api-key', 
@@ -1705,6 +1706,9 @@ angular.module('your_app_name.controllers', [])
                                     $scope.session.on({
                                         streamDestroyed: function (event) {
                                             console.log('stream destroyed');
+                                        },
+                                        streamReceived: function (event){
+                                            console.log('stream received....');
                                         },
                                         streamCreated: function (event) {
                                             console.log('stream created....');
@@ -1798,14 +1802,26 @@ angular.module('your_app_name.controllers', [])
             $scope.exitVideo = function () {
                 $scope.exitInitiated = 1;
                 console.log('exitvideo called');
-                try {                    
-                    $scope.session.disconnect();                  
-                    $state.go("app.video-broadcast", {reload: true});
+                try {
+                    if($scope.publisher){
+                        $scope.publisher.destroy();
+                    }
+                    if($scope.subscriber){
+                        $scope.subscriber.destroy();
+                    }
+                    if($scope.session){
+                        $scope.session.disconnect();                   
+                    }
+                                          
+                   
+                $state.go("app.video-broadcast", {reload: true});
                 } catch (err) {
+                    console.log('caught exit try: ');
                    console.log(err);
                     }
                     $state.go("app.video-broadcast", {reload: true});
             }
+
             $scope.initialiseSession($scope.sessionID);
            
             
