@@ -1375,6 +1375,7 @@ angular.module('your_app_name.controllers', [])
             $scope.category_sources = [];
             $scope.categoryId = $stateParams.categoryId;
         })
+        
         .controller('VideoBroadcastCreateCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading, $state, $filter) {
             $scope.permission = 0;
             $http({
@@ -1530,7 +1531,7 @@ angular.module('your_app_name.controllers', [])
 
 
         })
-.controller('VideoBroadcastStreamCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter,$ionicHistory) {
+        .controller('VideoBroadcastStreamCtrl', function ($scope, $http, $stateParams, $ionicModal, $ionicLoading,$state,$filter,$ionicHistory) {
             $scope.exitInitiated = 0;
             $scope.exitcalled = 0;
             $scope.session = '';
