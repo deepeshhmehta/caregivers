@@ -85,8 +85,10 @@
                                             {{app.app.scheduled_start_time|time1}} to {{app.app.scheduled_end_time|time1}} 
                                             <div class="cardmode">
                                                 <span class=" {{app.app.mode==1? 'Video': app.app.mode==3? 'ion-medkit': app.app.mode==4? 'Home': app.app.mode==2? 'Chat':''}}"></span>
-                                                <span ng-if="app.app.mode == 3">{{app.week_products_past.prod_service.alias}}</span>
                                             </div>
+                                        </div>
+                                        <div class="item item-divider" style="background-color:WHITE; text-align: center;" ng-if="app.app.mode == 3">
+                                            <span >{{app.all_product.prod_service.alias}}</span>   
                                         </div>
                                         <div class="p5 brd-bottom">
                                             <div class="row" ng-repeat="user in app.week_usersData_past">
@@ -141,8 +143,10 @@
                                             {{app.app.scheduled_start_time|time1}} to {{app.app.scheduled_end_time|time1}} 
                                             <div class="cardmode">
                                                 <span class=" {{app.app.mode==1? 'ion-ios-videocam': app.app.mode==3? 'ion-medkit': app.app.mode==4? 'Home': app.app.mode==2? 'Chat':''}}"></span>
-                                                <span ng-if="app.app.mode == 3">{{app.all_product_past.prod_service.alias}}</span>
                                             </div>
+                                        </div>
+                                        <div class="item item-divider" style="background-color:WHITE; text-align: center;" ng-if="app.app.mode == 3">
+                                            <span >{{app.all_product.prod_service.alias}}</span>   
                                         </div>
                                         <div class="p5 brd-bottom">
                                             <div class="row" ng-repeat="user in app.all_usersData_past">
