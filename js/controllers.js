@@ -3857,7 +3857,7 @@ angular.module('your_app_name.controllers', [])
                             params: {doctorid: $scope.userId, patientid: $scope.patientId,appointment_id: 0}
                         }).then(function successCallback(response) {
                             console.log(response);
-                            $scope.modal.hide();
+                            $scope.padd.hide();
                             store({'noteid': response.data.noteid});
                             $state.go('app.consultation-note-details',{appId:'0'}, {relaod: true});
                         })
@@ -5206,7 +5206,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ConsultationsNotesTreatmentViewCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading){
             console.log('treatmentview');
-
+            $scope.noteid = get('noteId');
             $http({
                         method: 'GET',
                         url: domain + 'doctors/consultation-note-treatment',
@@ -5413,7 +5413,7 @@ angular.module('your_app_name.controllers', [])
             $scope.data = {};
             $scope.data['noteid'] = $scope.noteid;
 
-            $scope.addDiagnosis = function(){
+            $scope.addObservationDiagnosis = function(){
                 $scope.modal.show();
             }
             $ionicModal.fromTemplateUrl('create-diagnosis', {
@@ -5584,7 +5584,7 @@ angular.module('your_app_name.controllers', [])
                 $scope.$broadcast('scroll.refreshComplete');
             }
 
-            $scope.addObservation = function(){
+            $scope.addObservationDiagnosis = function(){
                 $scope.modal.show();
             }
             $ionicModal.fromTemplateUrl('create-Observation', {
