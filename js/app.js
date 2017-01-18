@@ -677,6 +677,143 @@ angular.module('your_app_name', [
                         }
                     })
 
+                    .state('app.personalproblems', {
+                        url: "/personalproblems/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-personal-problem.html",
+                                controller: 'ConsultationsPersonalProblemCtrl'
+                            }
+                        }
+                    })
+                    .state('app.familybackground', {
+                        url: "/familyListing/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-family-listing.html",
+                                controller: 'ConsultationsFamilyListingCtrl'
+                            }
+                        }
+                    })
+                    .state('app.relativeproblems', {
+                        url: "/relativeproblems/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-relative-problems.html",
+                                controller: 'ConsultationsRelativeProblemsCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultationnotes', {
+                        url: "/consultationnotes/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-notes-list.html",
+                                controller: 'ConsultationsNotesListCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultation-note-details', {
+                        url: "/consultationnotedetails/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-note-details.html",
+                                controller: 'ConsultationsNotesDetailsCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.observations', {
+                        url: "/observations/{appId:string}/{noteid:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-note-observations.html",
+                                controller: 'ConsultationsNotesObservationsCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.note-diagnosis', {
+                        url: "/note-diagnosis/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-note-diagnosis.html",
+                                controller: 'ConsultationsNotesDiagnosisCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultation-medication', {
+                        url: "/note-medication/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-medication.html",
+                                controller: 'ConsultationsMedicationCtrl'
+                            }
+                        }
+                    })
+                    .state('app.consultation-investigation', {
+                        url: "/consultation-investigation/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-investigation.html",
+                                controller: 'ConsultationsInvestigationCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultation-procedure', {
+                        url: "/consultation-procedure/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-procedure.html",
+                                controller: 'ConsultationsProcedureCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultation-referral', {
+                        url: "/consultation-referral/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-referral.html",
+                                controller: 'ConsultationsReferralCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultation-diet', {
+                        url: "/consultation-diet/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-diet.html",
+                                controller: 'ConsultationsDietCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultation-task', {
+                        url: "/consultation-task/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-task.html",
+                                controller: 'ConsultationsTaskCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.consultation-note-records', {
+                        url: "/consultation-note-records/{appId:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-note-records.html",
+                                controller: 'ConsultationNoteRecordsCtrl'
+                            }
+                        }
+                    })                    
+
                     .state('app.notetype', {
                         //cache: false,
                         url: "/notetype",
@@ -1019,6 +1156,17 @@ angular.module('your_app_name', [
                         }
                     })
 
+                    .state('app.family-member', {
+                         cache: false,
+                        url: "/family-member/{id:string}",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/family-member.html",
+                                controller: 'FamilyMemberCtrl'
+                            }
+                        }
+                    })
+
                     .state('app.doctr-services', {
                         //  cache: false,
                         url: "/doctr-services/{id:string}",
@@ -1218,6 +1366,26 @@ angular.module('your_app_name', [
                         }
                     })
 
+                    .state('app.consultationNoteOption', {
+                        url: "/consultation/",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-note-options.html",
+                                controller: 'ConsultationNoteOptionsCtrl'
+                            }
+                        }
+                    })
+
+                    .state('app.personaldetails', {
+                        url: "/consultation-personal-details/",
+                        views: {
+                            'menuContent': {
+                                templateUrl: "views/app/consultation-note-personal-details.html",
+                                controller: 'ConsultationNotePersonalDetailsCtrl'
+                            }
+                        }
+                    })
+
                     .state('app.p-history', {
                         url: "/p-history",
                         views: {
@@ -1240,7 +1408,7 @@ angular.module('your_app_name', [
 
                     .state('app.add-category', {
                         cache: false,
-                        url: "/add-category/{id:int}",
+                        url: "/add-category/{id:string}",
                         views: {
                             'menuContent': {
                                 templateUrl: "views/app/add-record.html",

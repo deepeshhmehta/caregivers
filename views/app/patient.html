@@ -1,4 +1,4 @@
-<ion-view class="patient-view">
+<ion-view class="patient-view" >
     <ion-nav-title>
         <span>{{patientDetails.fname}}</span>
     </ion-nav-title>
@@ -25,15 +25,13 @@
         </div>
 
         <div class="maintab" style="margin:0;">
-        <div style="margin:10px;">
-            <select class="cselectn" ng-model="ptab" ng-change="changemaincate(ptab)">
-                <option value="pbackground" selected>Background</option>
-                <option value="precords" >Records</option>
-                <option value="pconsults" >Consults</option>
-<!--                <option value="pchats" >Chats</option>-->
-            </select>
-            </div>
-        
+            <div style="margin:10px;">
+                <div class="row tabnav" >
+                    <div class="col"><a  class="pbackground options active" ng-click="tabClicked('pbackground')">Background</a></div>
+                    <div class="col"><a  class="precords options" ng-click="tabClicked('precords')">Records</a></div>    
+                    <div class="col"><a  class="pconsults options" ng-click="tabClicked('pconsults')">Consults</a></div>    
+                </div>            
+            </div>        
         </div>
         <div class="clr"></div><div class="clr"></div>
         <div class="sldebxcontent" ng-show="pnotebackground">
@@ -68,12 +66,23 @@
     </ion-header-bar>
     <ion-content>
     <div class="list"></div>
+    <div class="greyblock item item-divider">Appointments</div>
     <div ng-click="go('app.doctr-services')" class="item item-divider">Book Appointment</div>
     <div class="list"></div>
-    
-    <div ng-click="go('app.cnote')" class="item item-divider">Create Note</div>
+
     <div class="list"></div>
-    <div ng-controller="AdsCtrl"  ng-click="getCategory()" class="item item-divider">Add Records</div>
+    <div class="greyblock item item-divider">Background</div>
+    <div ng-click="go('app.family-member')" class="item item-divider">Add Family Member</div>
+    <div class="list"></div>
+    
+    
+    <div class="list"></div>
+
+    <div ng-controller="AdsCtrl">
+    <div class="greyblock item item-divider">Add Records</div>
+    <div ng-click="createnoteandedit()" class="item item-divider">Create Note</div>
+    <div ng-repeat="cat in cats" ng-click="addRecord(cat.id)" class="item item-divider">{{cat.category}}</div>
+    </div>
 
 <!---    <div class="list">
     <div class="item item-divider">Add Record</div>

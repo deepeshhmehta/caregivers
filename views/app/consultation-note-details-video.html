@@ -1,0 +1,21 @@
+<div class="" ng-controller="ConsultationsNotesDetailsCtrl">
+    <div class="list catlist" style="margin-top:0px;">
+        <div class="maintab" style="margin:0;">
+            <div>
+                <div class="row tabnav" >
+                    <div class="col" ng-repeat="option in options"><a  ng-class="(tabnav['{{option.name|tolowercase}}'] == 1)? 'active options {{option.name|tolowercase}}':'options {{option.name|tolowercase}}'" ng-click="tabClicked('{{option.name|tolowercase}}','{{option.url}}')">{{option.name|capitalize}}</a></div>   
+                </div>            
+            </div>        
+        </div>
+        
+        <div class="sldebxcontent" ng-show="tabnav['observations']" ng-controller='ConsultationsNotesObservationViewVideoCtrl'>
+            <div ng-include src="'views/app/consultation-note-observation-view.html'" ></div>                        
+        </div>
+        <div class="sldebxcontent" ng-show="tabnav['diagnosis']" ng-controller='ConsultationsNotesDiagnosisViewVideoCtrl'>
+            <div ng-include src="'views/app/consultation-note-diagnosis-view.html'" ></div>                        
+        </div>
+
+        <div class="sldebxcontent" ng-show="tabnav['treatment']" ng-controller='ConsultationsNotesTreatmentViewVideoCtrl'>            <div ng-include src="'views/app/consultation-note-treatment-view-video.html'" ></div>                        
+        </div>
+    </div>
+</div>

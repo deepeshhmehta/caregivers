@@ -43,25 +43,14 @@
             </div>
         </my-tab>
 
-        <my-tab title ="Family">
+        <my-tab title ="Family">                            
             <div class="mtabcon" ng-controller="FamilyBackgroundCtrl">
-                <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="doRefresh()">
-                </ion-refresher>
-                <!-- <td-cards>
-                    <td-card ng-repeat="card in cards" id="td-card"
-                             ng-click ="selectedCard(card.id)"  
-                             on-transition-out="swipedAway(card.id)">
-                        <h4 class="cardtitle">
-                            {{card.relation.relation_name}}: {{card.relative_name}} ({{card.relative_age}} Years)
-                        </h4>
-                        
-                    </td-card>
-                </td-cards> -->
-                
+                <div style="float:left">
+                    <a ng-click="toggleHiddenTab('addfamilytab')" class="button btn-share"><i class="icon ion-ios-plus-outline"/></a>    
+                </div>
+                <div class ="clr"></div>
                 <div class="list card post-item greenbox" ng-repeat="card in cards">
-                    <a ng-click="selectedCard(card.id)">
+                    <a> <!-- ng-click="selectedCard(card.id)" -->
                         <div class="card-content p0">
                             <div class="row post-heading item item-text-wrap ">
                                 <div class="col col-70">
@@ -75,30 +64,11 @@
                                     <span>{{problem.problem.condition}}</span>
                                 </div>
                                 <div class="post-footer p0">
-                                    <div class="row">
-                                        <div class="col-80 ">Click to add more</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
-
-                <!-- <label class="item item-list listreq">
-                    <select ng-model = "newrelation.selectedrelation" class ="cselect" id="problemselect">
-                      <option ng-repeat="option in select" value={{option.id}}>{{option.relation_name}}</option>
-                    </select>
-                </label>
-                <label class="item item-list listreq" ng-if="newrelation.selectedrelation == 0">
-                    <input ng-model="newrelation.relationname" type = "text" placeholder=" Relation name (Father/Mother)" id="newrelation" />
-                </label>
-                <label class="item item-list listreq">
-                    <input ng-model="newrelation.name" type = "text" placeholder="Name" />
-                </label>
-                <label class="item item-list listreq">
-                    <input ng-model="newrelation.age" type = "number" placeholder="Age" />
-                </label>
-                <button ng-click="addRelation()" class="button button-positive button-block">Add Relation</button> -->
             </div>
         </my-tab>
     </my-tabs>

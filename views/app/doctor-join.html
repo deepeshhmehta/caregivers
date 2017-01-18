@@ -19,74 +19,143 @@
             <div id='myPublisherDiv' style="position:absolute;right: 10px;bottom:10px"></div> 
             <div id='subscribersDiv' class="subscribediv">Waiting for patient to join!</div> 
         </div>
-
+        
+        <!-- background -->
         <div class="crighttab greentab" id="cstab1">
             <div class="ctabbtn" ng-click="pulltab('cstab1')">
-                <span class="ion-plus"></span>
+                <span class="ion-person"></span>
             </div>
             <div class="sidetabcontent">
                 <ion-scroll direction="y" class="theroot"> 
-                    <div class="row">
-                        <div class="maintab">
-                            <select class="cselectn" ng-model="mntab"  ng-change="changejoincate(mntab)">
-                                <option value="ntcase" selected>Case</option>
-                                <option value="ntbackground" >Background</option>
-                                <option value="ntnote" >Notes</option>
-                                <option value="nttreatment" >Treatment</option>
-                            </select>
-                            <div class="col txt-right">
-                                <button class="button button-positive brd0" ng-click="submit()">Save All</button>
-                            </div>
-                        </div>
+                   
+                    <div class="clr"></div><div class="clr"></div>
+                    <div class="sldebxcontent" ng-show="1">
+                        <div ng-include src="'views/app/note-background-video.html'" ></div>                
                     </div>
-                    <div class="sldebxcontent" ng-show="notetcase">
-                        <div ng-include src="'views/app/video-note/note-case.html'" ></div>
-                    </div>
-                    <div class="sldebxcontent" ng-show="notebackground">
-                        <div ng-include src="'views/app/video-note/note-background.html'" ></div>                        
-                    </div>
-                    <div class="sldebxcontent" ng-show="notetnote">
-                        <div ng-include src="'views/app/video-note/notes.html'" ></div>                        	
-                    </div>	
-                    <div class="sldebxcontent" ng-show="notetreatment">
-                        <div ng-include src="'views/app/video-note/treatment-plan.html'" ></div>                        
-                    </div>
+
+                    
                 </ion-scroll>
             </div>
         </div>
 
+        <!-- details (obs/diag/treatment)-->
         <div class="crighttab greentab" id="cstab2" >
             <div class="ctabbtn" ng-click="pulltab('cstab2')" style="top:45px;">
-                <span class="ion-eye"></span>
+                <span class="ion-edit"></span>
             </div> 
             <div class="sidetabcontent">
                 <ion-scroll direction="y" class="theroot"> 
-                    <div class="maintab row">
-                        <select class="cselectn" ng-model="ptab" ng-change="changemaincate(ptab)">
-                            <option value="pbackground" selected>Background</option>
-                            <option value="precords" >Records</option>
-                            <option value="pconsults" >Consults</option>
-
-                        </select>
-                    </div>
+                   
                     <div class="clr"></div><div class="clr"></div>
-                    <div class="sldebxcontent" ng-show="pnotebackground">
-                        <div ng-include src="'views/app/preview/note-background.html'" ></div>                        
+                    <div class="sldebxcontent" ng-show="1">
+                        <div ng-include src="'views/app/consultation-note-details-video.html'" ></div>
                     </div>
-                    <div class="sldebxcontent" ng-show="precordsView">
-                        <div ng-include src="'views/app/preview/records-view.html'" ></div>                        
-                    </div>
-                    <div class="sldebxcontent" ng-show="pconsultsView">
-                        <div ng-include src="'views/app/preview/consults-view.html'" ></div>                        
-                    </div>
-                    <!--<div class="sldebxcontent" ng-show="pchatsView">
-                        <div ng-include src="'views/app/preview/chats-view.html'" ></div>                        
-                    </div>-->
+
+                    
                 </ion-scroll>
             </div>
             <div class="clr"></div>
         </div>
+
+        <!-- view records -->
+        <div class="crighttab greentab" id="cstab3" >
+            <div class="ctabbtn" ng-click="pulltab('cstab3')" style="top:90px;">
+                <span class="ion-folder"></span>
+            </div> 
+            <div class="sidetabcontent">
+                <ion-scroll direction="y" class="theroot"> 
+                   
+                    <div class="clr"></div><div class="clr"></div>
+                    <div class="sldebxcontent" ng-show="1">
+                        <div ng-include src="'views/app/patients/records-view-video.html'" ></div>                
+                    </div>
+
+                    
+                </ion-scroll>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+        <!-- add family -->
+        <div class="crighttab greentab hide" id="addfamilytab" >
+            <div class="ctabbtn" ng-click="pulltab('addfamilytab')" style="top:135px;">
+                <span class="ion-android-people"></span>
+            </div> 
+            <div class="sidetabcontent">
+                <ion-scroll direction="y" class="theroot"> 
+                   
+                    <div class="clr"></div><div class="clr"></div>
+                    <div class="sldebxcontent" ng-show="1">
+                        <div ng-include src="'views/app/consultation-note-add-family-member.html'" ></div>                
+                    </div>
+
+                    
+                </ion-scroll>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+        <!-- Add Obervation Diagnosis -->
+        <div class="crighttab greentab hide" id="obsdiagtab" >
+            <div class="ctabbtn" ng-click="pulltab('obsdiagtab')" style="top:180px;">
+                <span class="ion-ios-search-strong"></span>
+            </div> 
+            <div class="sidetabcontent">
+                <ion-scroll direction="y" class="theroot"> 
+                   
+                    <div class="clr"></div><div class="clr"></div>
+                    <div class="sldebxcontent" ng-show="1">
+                        <div ng-include src="'views/app/consultation-note-observation-diagnosis-add.html'" ></div>                
+                    </div>
+
+                    
+                </ion-scroll>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+        <!-- Add Treatment -->
+        <div class="crighttab greentab hide" id="addtreatmenttab" >
+            <div class="ctabbtn" ng-click="pulltab('addtreatmenttab')" style="top:225px;">
+                <span class="ion-clipboard"></span>
+            </div> 
+            <div class="sidetabcontent">
+                <ion-scroll direction="y" class="theroot"> 
+                   
+                    <div class="clr"></div><div class="clr"></div>
+                    <div class="sldebxcontent" ng-show="1">
+                        <div ng-include src="'views/app/consultation-note-treatment-add-video.html'" ></div>                
+                    </div>
+
+                    
+                </ion-scroll>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+        <!-- past note (obs/diag/treatment)-->
+        <div class="crighttab greentab hide" id="pastnote" >
+            <div class="ctabbtn" ng-click="toggleHiddenTab('pastnote')" style="top:270px;">
+                <span class="ion-edit"></span>
+            </div> 
+            <div class="sidetabcontent">
+                <ion-scroll direction="y" class="theroot"> 
+                   
+                    <div class="clr"></div><div class="clr"></div>
+                    <div class="sldebxcontent" ng-show="1">
+                        <div ng-include src="'views/app/past-note-details-video.html'" ></div>
+                    </div>
+
+                    
+                </ion-scroll>
+            </div>
+            <div class="clr"></div>
+        </div>
+
+
     </ion-content>
+
+    <!-- mute show/hide  -->
     <div class="sticyfooter joinfooter">
         <div class="tabs tabs-icon-top">
             <div class="tab-item muteMic"  onclick="classtoggle(this)">
@@ -134,4 +203,103 @@
     </div>
     </content>
     <div class="bar bar-footer" style="z-index:999;"><div class="button button-positive" style="width:100%;" ng-click="filemodal.hide()">Cancel</div></div>
+</script>
+
+<script id="knowcondition" type="text/ng-template">
+    <ion-modal-view>
+    <ion-header-bar class="bar app-top-bar">
+    <h1 class="title">Add Quick History</h1>
+    <button class="button button-clear" ng-click="modal.hide()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+    <ion-list>
+    <ion-checkbox ng-repeat="con in conditions track by $index" ng-model="conId[con.id]" ng-click="getCondition({{con.id}},'{{con.condition}}')" ng-checked="getPreCon({{con.id}})" >{{con.condition}}</ion-checkbox>
+    </ion-list>
+    </ion-content>
+    <div class="fixedbar">
+    <div class="button btn-add"  ng-click="modal.hide()" ><i class="ion-check"></i> Submit</div>
+    </div>
+    </ion-modal-view>
+</script>
+<script id="create-Observation" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar app-top-bar">
+            <h1 class="title">Write an Observation</h1>
+            <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
+        </ion-header-bar>
+        <ion-content>
+            
+                <div class="item item-divider"><span>Observation </span></div> 
+                <label class="item item-input listreq">
+                  <textarea ng-model="data.observation" type = "text" required placeholder="Observation" rows="25" cols="300" style="resize: none;">
+                    
+                  </textarea>
+                </label>
+                <button ng-click="saveObservation()" class="button button-positive button-block">Add</button>
+            
+        </ion-content>
+    </ion-modal-view>
+</script>
+
+<script id="create-diagnosis" type="text/ng-template">
+    <ion-modal-view>
+        <ion-header-bar class="bar app-top-bar">
+            <h1 class="title">Write a Diagnosis</h1>
+            <div class="button button-clear" ng-click="modal.hide()"><span class="icon ion-close"></span></div>
+        </ion-header-bar>
+        <ion-content>
+            
+                <div class="item item-divider"><span>Diagnosis </span></div> 
+                <label class="item item-input listreq">
+                  <textarea ng-model="data.diagnosis" type = "text" required placeholder="Diagnosis" rows="25" cols="300" style="resize: none;">
+                    
+                  </textarea>
+                </label>
+                <button ng-click="saveDiagnosis()" class="button button-positive button-block">Add</button>
+            
+        </ion-content>
+    </ion-modal-view>
+</script>
+<script id="mealdispdetails" type="text/ng-template">
+    <ion-modal-view>
+    <ion-header-bar class="bar app-top-bar">
+    <h1 class="modalhead txt-center">Meal Details - {{Mealday}}</h1>
+    <button class="button button-clear pull-right" ng-click="submitmodal()">Cancel</button>       
+    </ion-header-bar>
+    <ion-content>
+    <div ng-if="dietPlanDetails.length == 0"><p class="text-center">No data added</p></div>
+    <div ng-repeat="diet in dietPlanDetails">
+    <div class="item item-divider mt15">Meal {{$index+1}}</div>
+    <div ng-repeat="meal in diet" ng-if="meal.fields.name == 'meal-1' || meal.fields.name == 'value'">
+    <div class="row" >
+    <div class="col" ng-if="meal.fields.field == 'Time' && meal.value != '' && meal.value != '00:00:00'">{{meal.value|timeN}}</div>
+    <div class="col" ng-if="meal.fields.field != 'Time'">{{meal.value}}</div>
+    </div>
+    </div>
+    </div>  
+    </ion-content>
+    </ion-modal-view>
+</script>
+<script id="mealdetails" type="text/ng-template">
+    <ion-modal-view>
+    <ion-header-bar class="bar app-top-bar">
+    <h1 class="modalhead txt-center">Meal Details</h1>
+    <button class="button button-clear pull-left" ng-click="submitmodal()">Cancel</button>
+    <div class="buttons buttons-right pull-right"><span class="right-buttons">
+    <button type="submit" ng-click="saveMeal(day)" class="button button-positive w100p brdradious0" ng-disabled="addRecordForm.$invalid" disabled="disabled"> 
+    <strong>Save</strong> </button>
+    </span></div>
+    </ion-header-bar>
+    <ion-content>
+    <div ng-repeat="meal in mealDetails[day]">
+    <div class="item item-divider mt15">Meal {{$index+1}}</div>
+    <label class="item item-input">
+    <input type="time" placeholder="Time" ng-model="mealDetails[day][$index].time"  required="">
+    </label>
+    <label class="item item-input">
+    <textarea placeholder="Notes" name="" ng-model="mealDetails[day][$index].details" maxlength="" rows="2" cols="50"></textarea>
+    </label>
+    </div>  
+    </ion-content>
+    </ion-modal-view>
 </script>

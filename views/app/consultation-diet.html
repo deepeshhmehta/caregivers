@@ -1,0 +1,32 @@
+<ion-view class="tinder-cards-view">
+    <button class="button button-clear button-positive">Edit</button>
+    <ion-nav-title>
+        <span>Diet</span>
+    </ion-nav-title>
+    
+    <ion-content scroll="true" class="bgwhite">
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+        
+         <div class="mt40 p15">
+           <p>some sensible message here</p>
+        </div>
+        <td-cards>
+          	<td-card ng-repeat="card in cards" id="td-card"
+                     on-transition-out="swipedAway(card.id)"
+                     ng-click="getDetails(card['record_id'])">
+                <h4 class="cardtitle">
+                    <span> {{card['start-date-4']}} To {{card['end-date-3']}}</span>
+                </h4>
+                <div class="tdincard" ng-if="card['notes-21']">
+                    <p >Notes: {{card['notes-21']}}</p>
+                </div>
+                
+          	</td-card>
+        </td-cards>
+ 
+        <button ng-click="addDiet()" class="button button-positive button-block">Add New Diet</button>
+    </ion-content>
+</ion-view>

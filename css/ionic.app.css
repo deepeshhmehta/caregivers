@@ -6838,7 +6838,16 @@ progress {
     background-color: #444;
     box-shadow: none;
     color: #fff; }
-
+.dietdays{width:100%;}
+.filled-data{    color: #387EF5;
+                 border-color: #387EF5;}
+.filled-data .icon{color: #387EF5;}
+.filldata{background: #387EF5;
+          color: #fff;
+}
+.filldata .icon{
+    color: #fff;
+}
 .button-small {
     padding: 2px 4px 1px;
     min-width: 28px;
@@ -9544,10 +9553,24 @@ input[type="date"]:before{
     transform: translate3d(600px, 0px, 0px);
 
 }
-.crighttab.active{
+.crighttab.active .clefttab.active{
     transition: 300ms ease-in-out;
     /* transform: translate3d(0px, 0px, 0px);*/
 }
+.clefttab{
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    top: 60px;
+    height: 514px;
+    background: #F7F7F7;
+    box-shadow: -2px 0 0px #28A54C;
+    z-index: 9;
+    transition: 300ms ease-in; 
+    transform: translate3d(600px, 0px, 0px);
+
+}
+
 .ctabbtn{padding: 10px 10px;
          top: 0;
 
@@ -9570,7 +9593,7 @@ input[type="date"]:before{
 .csradio .item-radio .item-content{    padding: 11px 49px 11px 16px;}
 .csradio  .item.item-radio{   border-color: #efefef;}
 .csradio .item-radio .radio-icon{       padding: 3px 10px;}
-.crighttab .cselectn{/* background:transparent; */}
+.crighttab .cselectn{ /*background:transparent;*/ }
 
 .maintab .cselectn{    padding: 8px !important;
                        font-size: 15px;
@@ -9581,7 +9604,7 @@ input[type="date"]:before{
 } 
 .maintab .cselectn option{color:#fff;}
 
-.crighttab .item-divider{ background-color:#efefef; margin-top:10px;}
+.crighttab .item-divider .clefttab{ background-color:#efefef; margin-top:10px;}
 .maintab{   margin: 0 10px 0px;
             width: 100%;}
 .ctabs .card-heding{padding:0px !important;}
@@ -9836,6 +9859,53 @@ input[type="date"]:before{
   text-align: center;
 }
 
+.greyblock{
+  background-color: #c6c0ae ;
+}
+
+.cardtitle{    background: #eee;
+               margin-top: 0;
+               padding: 10px;
+               margin-bottom: 0;
+               font-size: 16px;}
+.citem{ padding: 10px 20px;  }
+.tdincard{padding: 20px 10px;     height: 200px;}
+
+.tinder-cards-view td-cards {
+    display: block; }
+.tinder-cards-view td-card {
+    position: absolute;
+    left: 50%;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    margin-left: -150px;
+    width: 300px;
+    border: 1px solid #999;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    background: white; }
+.tinder-cards-view td-card .image {
+    position: relative; }
+.tinder-cards-view td-card img {
+    max-width: 100%; }
+.tinder-cards-view td-card .title {
+    background: #FFF;
+    font-size: 16px;
+    padding: 15px;
+    text-transform: capitalize;
+    text-align: center; }
+
+.tinder-cards-view td-card{position: inherit; 
+                           margin: 50px 20px;
+                           width: auto;
+                           border-radius: 0px; 
+}
+.psrelative{position: relative; z-index: 999;}  
+
+.inbtn{    width: 28%;
+           margin: 6px 2%;
+           float:left;}
+.inbtn button{width:100%; padding: 5px 0;}
 
 
 /* added by leena END */
