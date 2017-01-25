@@ -1495,7 +1495,6 @@ angular.module('your_app_name.controllers', [])
         })
         .controller('RecordsViewCtrl', function ($scope, $http, $state, $stateParams, $sce, $rootScope, $ionicLoading, $cordovaPrinter, $ionicModal, $timeout) {
             $scope.interface = window.localStorage.getItem('interface_id');
-            unset(['patientId', 'doctorId', 'recId']);
             $scope.userId = get('id');
             $scope.category = [];
             $scope.catId = $stateParams.id;
@@ -1505,7 +1504,8 @@ angular.module('your_app_name.controllers', [])
             $scope.recIds = [];
             $scope.orderRec = 0;
             $scope.userId = get('id');
-            $scope.patientId = get('id');
+            $scope.patientId = get('patientId');
+            // unset(['patientId', 'doctorId', 'recId']);
             $scope.repeatFreq = [];
             $scope.repeatNo = [];
             $ionicLoading.show({template: 'Loading...'});
@@ -1523,7 +1523,7 @@ angular.module('your_app_name.controllers', [])
           
             $http({
                 method: 'GET',
-                url: domain + 'records/get-records-details',
+                url: domain + 'records/get-records-details-doctors',
                 params: {id: $stateParams.id, userId: $scope.userId, patientId: $scope.patientId, interface: $scope.interface, shared: $scope.shared}
             }).then(function successCallback(response) {
                 console.log(response.data);
@@ -1985,10 +1985,10 @@ angular.module('your_app_name.controllers', [])
             $scope.isNumber = function (num) {
                 return angular.isNumber(num);
             };
-            $ionicLoading.show({template: 'Loading...'});
+            // $ionicLoading.show({template: 'Loading...'});
             $http({
                 method: 'GET',
-                url: domain + 'records/get-record-details',
+                url: domain + 'doctrsrecords/get-record-details',
                 params: {id: $stateParams.id, userId: $scope.userId, interface: $scope.interface}
             }).then(function successCallback(response) {
                 console.log(response.data);
@@ -3863,11 +3863,11 @@ angular.module('your_app_name.controllers', [])
                         })
             }
 
-            $scope.gotopage = function(goUrl,cat){
+            $scope.gotopage = function(goUrl,cat,shared){
                 cat = "" + cat +"";
                 console.log('gotopage: ' + goUrl);
                 store({'patientId': $scope.patientId,'id':$scope.userId,shared: 0,create: 0});
-                $state.go(goUrl, {'patientId': $scope.patientId,'userId' : $scope.userId, 'id':cat,shared: '0'}, {relaod: true});
+                $state.go(goUrl, {'patientId': $scope.patientId,'userId' : $scope.userId, 'id':cat,shared: shared}, {relaod: true});
             }
             console.log($scope.patientId);
             window.localStorage.setItem('patientId', $scope.patientId)
