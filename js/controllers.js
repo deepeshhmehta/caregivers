@@ -3858,7 +3858,7 @@ angular.module('your_app_name.controllers', [])
                         }).then(function successCallback(response) {
                             console.log(response);
                             $scope.padd.hide();
-                            store({'noteid': response.data.noteid});
+                            store({'noteid': response.data.noteid,'noteId' : response.data.noteid});
                             $state.go('app.consultation-note-details',{appId:'0'}, {relaod: true});
                         })
             }
@@ -5601,7 +5601,7 @@ angular.module('your_app_name.controllers', [])
                         data: JSON.stringify($scope.data)
                     }).then(function successCallback(response) {
                         alert(response.data.message);
-                        $scope.doRefresh();
+                        $scope.doRefreshObservations();
                         
                     });
             }
