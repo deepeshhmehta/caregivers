@@ -6989,7 +6989,7 @@ angular.module('your_app_name.controllers', [])
             };
         })
 
-        .controller('HomepageCtrl', function ($scope, $http, $stateParams, $ionicModal, $rootScope, $ionicLoading) {
+        .controller('HomepageCtrl', function ($scope, $http, $stateParams, $ionicModal, $rootScope, $ionicLoading, $ionicSlideBoxDelegate, $timeout) {
             $ionicLoading.show({template: 'Loading..'});
             $rootScope.recCId = "";
             $rootScope.measurement = "";
@@ -7013,6 +7013,17 @@ angular.module('your_app_name.controllers', [])
             window.localStorage.removeItem('appId');
             window.localStorage.removeItem('drId');
             window.localStorage.removeItem('doctorId');
+            $http({
+                method: 'GET',
+                url: domain + 'image-slider-caregivers',
+                params: {userid: get('id')}
+            }).then(function successCallback(response) {
+                $scope.sliderImages = response.data;
+                $timeout(function () {
+                    $ionicSlideBoxDelegate.update();
+                }, 1000);
+            });
+
             $http({
                 method: 'GET',
                 url: domain + 'doctorsapp/get-chat-unread-cnt',

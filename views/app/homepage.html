@@ -5,7 +5,14 @@
     </ion-nav-title>
 	 
     <ion-content>
-
+        <div class="slider">
+            <ion-slide-box show-pager="false" does-continue="true" auto-play="true" slide-interval="10000">
+                <ion-slide ng-repeat="image in sliderImages">
+                    <img src={{image.image_url}}></img>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        
         <div class="list catlist">
             <a class="item item-icon-right" ng-repeat="menu in menuItem"  ui-sref="{{menu.url}}" ng-if="menu.intereface_menu.menu!='settings'">
                 <i class="cicon {{menu.intereface_menu.menu=='patients'? 'ion-person-stalker':menu.intereface_menu.menu=='consultations'? 'ion-medkit':menu.intereface_menu.menu=='records'? 'ion-clipboard': menu.intereface_menu.menu=='chats'? 'ion-chatboxes':menu.intereface_menu.menu=='packages'? 'ion-cube':menu.intereface_menu.menu=='library'? 'ion-ios-book':menu.intereface_menu.menu=='pathology'? 'ion-erlenmeyer-flask':menu.intereface_menu.menu=='medicines'? 'ion-medkit':menu.intereface_menu.menu=='inventory'? 'ion-person-stalker':menu.intereface_menu.menu=='video broadcast'? 'ion-radio-waves': 'ion-cube'}}"></i>

@@ -292,13 +292,13 @@
     </ion-header-bar>
     <ion-content>
     <div ng-repeat="meal in mealDetails[day]">
-    <div class="item item-divider mt15">Meal {{$index+1}}</div>
-    <label class="item item-input">
-    <input type="time" placeholder="Time" ng-model="mealDetails[day][$index].time"  required="">
-    </label>
-    <label class="item item-input">
-    <textarea placeholder="Notes" name="" ng-model="mealDetails[day][$index].details" maxlength="" rows="2" cols="50"></textarea>
-    </label>
+        <div class="item item-divider mt15">Meal {{$index+1}}</div>
+        <label class="item item-input">
+            <input type="time" placeholder="Time" ng-model="mealDetails[day][$index].time"  required="">
+        </label>
+        <label class="item item-input">
+            <textarea placeholder="Notes" name="" ng-model="mealDetails[day][$index].details" maxlength="" rows="2" cols="50"></textarea>
+        </label>
     </div>  
     </ion-content>
     </ion-modal-view>
