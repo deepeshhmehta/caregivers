@@ -5434,7 +5434,9 @@ a.item-content {
 .slider {
     position: relative;
     visibility: hidden;
-    overflow: hidden; }
+    overflow: hidden; 
+    text-align: center;
+    height:25%;}
 
 .slider-slides {
     position: relative;
