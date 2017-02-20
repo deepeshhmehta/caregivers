@@ -1,17 +1,21 @@
-<div>
+<div >
+    <div class="clr"></div>
     <div style="padding:2px">
-        <div style ="float:left">
-            <a ng-click="shareObservation(cards)" class="button btn-share" id="shareObs"><i class="icon ion-android-share-alt"/></a>
+        <div style="float:left; margin:5px;">
+            <a ng-click="shareObservation(cardsObservations)" class="button btn-share" id="shareObs"><i class="icon ion-android-share-alt"/></a>
             <a class="button btn-delete" style="display: none" id="cancelObs" ng-click="cancelObservation()"><i class="icon ion-android-close"></i></a>
         </div>
-    	<div style="float:left">
-    		<a ng-click="addObservationDiagnosis(1)" class="button btn-share"><i class="icon ion-ios-plus-outline"/></a>    
+        <div style="float:left; margin:5px;">
+            <a ng-click="doRefreshObservations()" class="button btn-grey">Reload</a>    
+        </div>
+    	<div style="float:left; margin:5px;">
+    		<a ng-click="addObservationDiagnosis(1)" class="button btn-add"><i class="icon ion-ios-plus-outline"/></a>    
     	</div>
         <div class ="clr"/></div>
     </div>
-    
         <div class="clr"></div>
-        <div class="list card post-item greenbox" ng-repeat="card in cards">
+        <div class="clr"></div>
+        <div class="list card post-item greenbox" ng-repeat="card in cardsObservations">
             <a ng-click="">
                 <div class="card-content p0">
                     <div class="row post-heading item item-text-wrap ">

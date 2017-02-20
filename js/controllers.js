@@ -968,28 +968,28 @@ angular.module('your_app_name.controllers', [])
                                 historyRoot: true
                             });
                             $scope.recIds = response.records.id;
-                            var confirm = window.confirm("Do you really want to share this with patient?");
-                            if (confirm) {
-                                console.log($scope.recIds);
-                                $http({
-                                    method: 'POST',
-                                    url: domain + 'doctrsrecords/share',
-                                    params: {id: $scope.recIds, userId: $scope.userId, docId: $scope.userId, patientId: $scope.patientId, shared: 0}
-                                }).then(function successCallback(response) {
-                                    console.log(response);
-                                    if (response.data == 'Success') {
-                                        alert("Records shared successfully!");
+                            // var confirm = window.confirm("Do you really want to share this with patient?");
+                            // if (confirm) {
+                            //     console.log($scope.recIds);
+                            //     $http({
+                            //         method: 'POST',
+                            //         url: domain + 'doctrsrecords/share',
+                            //         params: {id: $scope.recIds, userId: $scope.userId, docId: $scope.userId, patientId: $scope.patientId, shared: 0}
+                            //     }).then(function successCallback(response) {
+                            //         console.log(response);
+                            //         if (response.data == 'Success') {
+                            //             alert("Records shared successfully!");
                                         
-                                        //$state.go('app.records-view', {'id': $scope.categoryId, 'patientId': $scope.patientId, 'shared': 0}, {}, {reload: true});
-                                    }
-                                }, function errorCallback(e) {
-                                    console.log(e);
-                                });
-                            } else {
+                            //             //$state.go('app.records-view', {'id': $scope.categoryId, 'patientId': $scope.patientId, 'shared': 0}, {}, {reload: true});
+                            //         }
+                            //     }, function errorCallback(e) {
+                            //         console.log(e);
+                            //     });
+                            // } else {
 
                                 alert("Record added successfully!");
                                 
-                            }
+                            // }
                         $scope.cancelTreatmentAddPage();
                         } else if (response.err != '') {
                             alert('Please fill mandatory fields');
@@ -5240,9 +5240,19 @@ angular.module('your_app_name.controllers', [])
                                 params: {noteid: $scope.noteid}
                             }).then(function successCallback(response) {
                                 $scope.allCats = response.data;
-                                console.log($scope.options);
+                                console.log($scope.allCats);
                             });
                 },2000);
+            $scope.loadTreamtments = function(){
+                $http({
+                                method: 'GET',
+                                url: domain + 'doctors/consultation-note-treatment',
+                                params: {noteid: $scope.noteid}
+                            }).then(function successCallback(response) {
+                                $scope.allCats = response.data;
+                                console.log($scope.allCats);
+                            });
+            }
             $scope.noteid = get('noteid');
             $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
 
@@ -5463,7 +5473,7 @@ angular.module('your_app_name.controllers', [])
         })
 
         .controller('ConsultationsNotesDiagnosisViewVideoCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading){
-            
+            $scope.noteid = ( get('noteId') == null)? get('noteid'): get('noteId');
             $scope.data = {};
 
             $scope.addDiagnosis = function(){
@@ -5623,17 +5633,17 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ConsultationsNotesObservationViewVideoCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading){
             $scope.data = {};
+            $scope.cardsObservations = {};
 
             $scope.doRefreshObservations = function(){
                 $http({
                         method: 'GET',
                         url: domain + 'doctors/consultation-notes-observations',
                         params: {note_id: $scope.noteid}
-                    }).then(function successCallback(response) {
-                        $scope.cards = {};
-                        $scope.cards = response.data.existing_observations;
-
-                        console.log($scope.cards);
+                    }).then(function successCallback(response) {   
+                    
+                        $scope.cardsObservations = response.data.existing_observations;
+                        console.log($scope.cardsObservations);
                         console.log(response.data.message);
                     });
                 $scope.$broadcast('scroll.refreshComplete');
@@ -5658,7 +5668,11 @@ angular.module('your_app_name.controllers', [])
                         alert(response.data.message);
                         jQuery('.observationAdd').hide('slow');
                         $scope.data['observation'] = "";
-                        $scope.doRefreshObservations();
+                        // $scope.$apply(function () {
+           $scope.doRefreshObservations();
+        // });
+                        
+
                         $scope.toggleHiddenTab('obsdiagtab');
                     });
             }
@@ -6537,19 +6551,19 @@ angular.module('your_app_name.controllers', [])
                 $scope.endSlot = $filter('date')(getAfterTime($scope.startSlot, 30), 'yyyy-MM-dd HH:mm:ss');
                 $scope.bookingEnd = $scope.endSlot;
                 $scope.bookAppointment(prodId, 1);
-//                $rootScope.$broadcast('loading:hide');
-//                $ionicLoading.show();
-//                $http({
-//                    method: 'GET',
-//                    url: domain + 'kookoo/check-doctor-availability',
-//                    params: {id: uid, interface: $scope.interface}
-//                }).then(function successCallback(responseData) {
-//                    if (responseData.data.status == 1) {
-//                        $state.go('app.checkavailable', {'data': prodId, 'uid': uid});
-//                    } else {
-//                        alert('Sorry. The specialist is currently unavailable. Please try booking a scheduled video or try again later.');
-//                    }
-//                });
+               // $rootScope.$broadcast('loading:hide');
+               // $ionicLoading.show();
+               // $http({
+               //     method: 'GET',
+               //     url: domain + 'kookoo/check-doctor-availability',
+               //     params: {id: uid, interface: $scope.interface}
+               // }).then(function successCallback(responseData) {
+               //     if (responseData.data.status == 1) {
+               //         $state.go('app.checkavailable', {'data': prodId, 'uid': uid});
+               //     } else {
+               //         alert('Sorry. The specialist is currently unavailable. Please try booking a scheduled video or try again later.');
+               //     }
+               // });
             };
             $scope.getNextSlots = function (nextDate, supsassId, key, serv) {
                 console.log(nextDate + '=======' + supsassId + '=====' + key + "Seveice == " + serv);
@@ -15516,33 +15530,7 @@ angular.module('your_app_name.controllers', [])
                     });
                 }
             };
-            $scope.saveObservation = function (observation, objSum) {
-                console.log(observation + "===" + objSum);
-                $scope.objText.push({value: observation, summary: objSum});
-                $scope.jnplaintext = false;
-                $scope.eobserv = false;
-                //$('input[name=eval]').attr('checked', false);
-                console.log($scope.objText);
-                $scope.patientId = get('patientId');
-                $scope.doctorId = get('doctorId');
-                $scope.cnId = $scope.recId;
-                $scope.catId = '';
-                //console.log($scope.objText);
-                if (observation != '') {
-                    console.log("not blank");
-                    $http({
-                        method: 'GET',
-                        url: domain + 'doctrsrecords/save-web-observations',
-                        params: {patient: $scope.patientId, cnId: $scope.cnId, appId: $scope.appId, userId: $scope.userId, objType: 'Text', recId: $scope.recId, doctor: $scope.doctorId, catId: $scope.catId, objText: JSON.stringify($scope.objText), objId: $scope.objId}
-                    }).then(function successCallback(response) {
-                        $scope.objId = response.data.records.id;
-                        $scope.hideformD();
-                    }, function errorCallback(e) {
-                        console.log(e);
-                    });
-                }
-
-            };
+            
             $scope.saveInvest = function () {
                 //$ionicLoading.show({template: 'Adding...'});
                 var data = new FormData(jQuery("#addInvForm")[0]);
