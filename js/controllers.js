@@ -371,6 +371,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('AddRecordCtrl', function ($scope, $http, $state, $stateParams, $compile, $ionicModal, $ionicHistory, $filter, $timeout, $ionicLoading, $cordovaCamera, $cordovaFile, $rootScope) {
             $scope.noteid = get('noteid');
+            $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
             console.log($scope.noteid);
             $ionicLoading.show({template: 'Loading..'});
             $scope.interface = window.localStorage.getItem('interface_id');
@@ -829,6 +830,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('AddRecordCtrlView', function ($scope, $http, $state, $stateParams, $compile, $ionicModal, $ionicHistory, $filter, $timeout, $ionicLoading, $cordovaCamera, $cordovaFile, $rootScope) {
             $scope.noteid = get('noteid');
+            $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
             console.log($scope.noteid);
             
             $scope.interface = window.localStorage.getItem('interface_id');
@@ -4609,6 +4611,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ConsultationsNotesDetailsCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading) {
             $scope.noteid = get('noteId');
+            $scope.noteid = ($scope.noteid == null)? get('noteid'): $scope.noteid;
             $scope.data = {};
             $scope.tabnav = {};
             $scope.obsId = [];
@@ -4985,6 +4988,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ConsultationsMedicationCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading) {
             $scope.noteid = get('noteid');
+            $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
             console.log('noteid: ' + $scope.noteid);
 
             $scope.data =  {};
@@ -5060,6 +5064,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ConsultationsInvestigationCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading) {
             $scope.noteid = get('noteid');
+            $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
             $scope.data = {};
             $scope.data['noteid'] = $scope.noteid;
             $scope.doRefresh = function(){
@@ -5207,6 +5212,7 @@ angular.module('your_app_name.controllers', [])
         .controller('ConsultationsNotesTreatmentViewCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading){
             console.log('treatmentview');
             $scope.noteid = get('noteId');
+            $scope.noteid = ($scope.noteid == null)? get('noteid'): $scope.noteid;
             $http({
                         method: 'GET',
                         url: domain + 'doctors/consultation-note-treatment',
@@ -5226,6 +5232,7 @@ angular.module('your_app_name.controllers', [])
             console.log('treatmentview');
             $timeout(function(){
                     $scope.noteid = get('noteid');
+                    $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
 
                     $http({
                                 method: 'GET',
@@ -5237,6 +5244,7 @@ angular.module('your_app_name.controllers', [])
                             });
                 },2000);
             $scope.noteid = get('noteid');
+            $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
 
             $http({
                         method: 'GET',
@@ -5410,6 +5418,7 @@ angular.module('your_app_name.controllers', [])
         })
         .controller('ConsultationsNotesDiagnosisViewCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading){
             $scope.noteid = get('noteId');
+            $scope.noteid = ($scope.noteid == null)? get('noteid'): $scope.noteid;
             $scope.data = {};
             $scope.data['noteid'] = $scope.noteid;
 
@@ -5504,6 +5513,7 @@ angular.module('your_app_name.controllers', [])
 
             $timeout(function(){
                 $scope.noteid = get('noteid');
+                $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
                 $scope.data['noteid'] = $scope.noteid;
                 $scope.doRefreshDiagnosis();
             },2000);
@@ -5567,6 +5577,7 @@ angular.module('your_app_name.controllers', [])
         .controller('ConsultationsNotesObservationViewCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading){
            
             $scope.noteid = get('noteId');
+            $scope.noteid = ($scope.noteid == null)? get('noteid'): $scope.noteid;
             $scope.data = {};
             $scope.data['noteid'] = $scope.noteid;
             $scope.doRefreshObservations = function(){
@@ -5654,6 +5665,7 @@ angular.module('your_app_name.controllers', [])
 
             $timeout(function(){
                 $scope.noteid = get('noteid');
+                $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
                 $scope.data['noteid'] = $scope.noteid;
                 $scope.doRefreshObservations();
             },2000);
@@ -5712,6 +5724,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ConsultationsNotesObservationsCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading) {
             $scope.noteid = get('noteid');
+            $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
             $scope.data = {};
             $scope.data['noteid'] = $scope.noteid;
 
@@ -5961,6 +5974,7 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ConsultationsNotesDiagnosisCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading) {
             $scope.noteid = get('noteid');
+            $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
             $scope.data = {};
             $scope.data['noteid'] = $scope.noteid;
 
