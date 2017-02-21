@@ -1711,23 +1711,24 @@ angular.module('your_app_name.controllers', [])
                         var confirm = window.confirm("Do you really want to share?");
                         if (confirm) {
                             console.log($scope.recIds);
+                            console.log('share api call here');
                             $http({
                                 method: 'POST',
-                                url: domain + 'records/share-by-category',
-                                params: {ids: JSON.stringify($scope.recIds), userId: $scope.userId, docId: $scope.docId, shared: $scope.shared}
+                                url: domain + 'doctrsrecords/share-by-category',
+                                params: {ids: JSON.stringify($scope.recIds), userId: $scope.userId, patientId: $scope.patientId, docId: $scope.docId, shared: $scope.shared}
                             }).then(function successCallback(response) {
                                 console.log(response);
                                 if (response.data == 'Success') {
                                     alert("Records shared successfully!");
                                     //window.location.reload();
-                                    $scope.submitmodal();
+                                    // $scope.submitmodal();
                                     $scope.CancelAction();
                                 }
                             }, function errorCallback(e) {
                                 console.log(e);
                             });
                         } else {
-                            $scope.submitmodal();
+                            // $scope.submitmodal();
                             $scope.CancelAction();
                         }
                     } else {
@@ -1758,13 +1759,16 @@ angular.module('your_app_name.controllers', [])
                 jQuery('#rec2').css('display', 'block');
             };
             $scope.CancelAction = function () {
+                console.log('cancel action called');
                 jQuery('.selectrecord').css('display', 'none');
                 jQuery('.radiorecord').css('display', 'none');
                 jQuery('.btview').css('display', 'block');
-                jQuery('#rec1').css('display', 'block');
+
+                jQuery('#rec1').show();
                 jQuery('#rec2').css('display', 'none');
                 jQuery('#rec3').css('display', 'none');
-                jQuery('#rec4').css('display', 'none');
+                jQuery('#rec4').css('display', 'none');                
+                
             };
             $scope.selectcheckbox = function ($event) {
                 console.log($event);
