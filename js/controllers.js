@@ -17216,6 +17216,100 @@ angular.module('your_app_name.controllers', [])
                 window.plugins.socialsharing.share(null, null, $scope.images);
             };
         })
+        .controller('ConsultationsNotesPlainNoteCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile,$timeout, $filter) {
+            $scope.noteid = (get('noteId') == null)? get('noteid'):get('noteId');
+            $scope.fileToBeUploaded = null;
+            $scope.data = {};
+            $scope.data['noteid'] = $scope.noteid;
+            $scope.data['description']= "";
+            console.log('plain note controller called for note id ' + $scope.noteid);
+            
+            $scope.doRefresh = function(){
+                $http({
+                    method: 'GET',
+                    url: domain + 'doctors/consultation-note-plain-notes',
+                    params: {noteid: $scope.noteid}
+                }).then(function successCallback(response) {
+                    $scope.plainNoteCards = response.data;
+                    console.log($scope.plainNoteCards);
+                }, function errorCallback(response){
+                    console.log('error');
+                });
+            }
 
+            $scope.savePlainNote = function(){
+                console.log('savePlainNote called');
+                var fd = new FormData();
+                fd.append("file", $scope.fileToBeUploaded);
+                fd.append("noteid",$scope.noteid);
+                console.log('fd created');
+                console.log(fd);
+                $http.post(domain + 'doctors/consultation-note-plain-notes-image-upload', fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+                }
+                ).success(function(result) {
+                    console.log(result);
+                    var allow = true;   
+                    switch(result.status){
+                        case 0:{
+                            alert('error');
+                            console.log(result.error);
+                            break;
+                        }
+                        case 1:{
+                            $scope.data['url'] = result.src;
+                            break;
+                        }
+                        case 2:{
+                            if(confirm(result.message)){
+                                $scope.data['url'] = " ";
+                            }else{
+                                allow = false;
+                            }
+
+                            break;
+                        }
+                        default:  {
+                            alert('unknown error');
+                            allow = false;
+                            break;
+                        }
+                    }
+                    if(allow){
+                        console.log(JSON.stringify($scope.data));
+                        $http({
+                            method: 'POST',
+                            url: domain + 'doctors/consultation-note-add-plain-notes',
+                            data: JSON.stringify($scope.data)
+                        }).then(function successCallback(response) {
+                           $scope.cancelPlainNoteAddPage();
+                           $scope.doRefresh();
+                           alert('added successfully');
+                        });
+                    }
+                })
+            }
+            $scope.cancelPlainNoteAddPage = function(){
+                console.log('cancelPlainNoteAddPage called');
+                jQuery('.PlainNotesView').show('slow');
+                jQuery('.plainNotesAdd').hide('slow');
+            }
+            $scope.sharePlainNotes = function(){
+                console.log('sharePlainNotes called');
+            }
+            $scope.addPlainNotes = function(){
+                console.log('addPlainNotes called');
+                jQuery('.plainNotesAdd').show('slow');
+                jQuery('.PlainNotesView').hide('slow');
+            }
+
+            $scope.setFile = function(element){
+                console.log(element.files[0]);
+                $scope.fileToBeUploaded = element.files[0];
+            }
+
+            $scope.doRefresh();
+        })
 
         ;
