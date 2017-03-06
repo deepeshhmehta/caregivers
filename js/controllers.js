@@ -5261,8 +5261,8 @@ angular.module('your_app_name.controllers', [])
             $scope.noteid = ($scope.noteid == null)? get('noteId'): $scope.noteid;
 
             $http({
-                        method: 'GET',
-                        url: domain + 'doctors/consultation-note-treatment',
+                    method: 'GET',
+                    url: domain + 'doctors/consultation-note-treatment',
                         params: {noteid: $scope.noteid}
                     }).then(function successCallback(response) {
                         $scope.allCats = response.data;
@@ -5315,12 +5315,16 @@ angular.module('your_app_name.controllers', [])
                 $state.go('app.record-details', {'id': val}, {reload: true});
             }
 
-           $scope.shareTreatment = function(){
-                if(confirm('Are you sure you want to share all '+$scope.catname+' records with the patient?')){
+            $scope.shareTreatmentAll = function(obj){
+                if(confirm('Are you sure you want to share all treatments with the patient?')){
                     console.log('sharing following treatments with the patient');
-                    
+                    angular.forEach(obj, function(value,key){
+                        if(value['count'] > 0){
+                            $scope.catIds.push(value['category']);
+                        }
+                    });
                     $scope.data['noteid'] = $scope.noteid;
-                    $scope.data['categories'] =[$scope.catid];
+                    $scope.data['categories'] = $scope.catIds;
                     $scope.data['type'] = 4;
                     console.log(JSON.stringify($scope.data));
 
@@ -5337,8 +5341,8 @@ angular.module('your_app_name.controllers', [])
                     });
 
                 }
-            }      
-        })
+            }
+        })      
         .controller('PastConsultationsNotesTreatmentViewVideoCtrl',function($scope, $http, $stateParams, $rootScope, $state, $compile, $ionicModal, $ionicHistory, $timeout, $filter, $ionicLoading){
             console.log('treatmentview');
             
@@ -5406,12 +5410,39 @@ angular.module('your_app_name.controllers', [])
                 $state.go('app.record-details', {'id': val}, {reload: true});
             }
 
-           $scope.shareTreatment = function(){
+            $scope.shareTreatment = function(){
                 if(confirm('Are you sure you want to share all '+$scope.catname+' records with the patient?')){
                     console.log('sharing following treatments with the patient');
                     
                     $scope.data['noteid'] = $scope.pastNoteid;
                     $scope.data['categories'] =[$scope.catid];
+                    $scope.data['type'] = 4;
+                    console.log(JSON.stringify($scope.data));
+
+                    $http({
+                        method: 'POST',
+                        url: domain + 'doctors/share-consultation-note-details',
+                        data: JSON.stringify($scope.data)
+                    }).then(function successCallback(response) {
+                        alert(response.data.message);
+                    },function errorCallback(response){
+                        alert('there was an error encountered');
+                        console.log(response.data.message);
+                        console.log(response.data.error);
+                    });
+
+                }
+            }
+            $scope.shareTreatment = function(obj){
+                if(confirm('Are you sure you want to share all treatments with the patient?')){
+                    console.log('sharing following treatments with the patient');
+                    angular.forEach(obj, function(value,key){
+                        if(value['count'] > 0){
+                            $scope.catIds.push(value['category']);
+                        }
+                    });
+                    $scope.data['noteid'] = $scope.noteid;
+                    $scope.data['categories'] = $scope.catIds;
                     $scope.data['type'] = 4;
                     console.log(JSON.stringify($scope.data));
 
@@ -17223,6 +17254,7 @@ angular.module('your_app_name.controllers', [])
             $scope.data['noteid'] = $scope.noteid;
             $scope.data['description']= "";
             $scope.selectedPlainNoteImg = "";
+            $scope.PlainNoteIds = [];
             console.log('plain note controller called for note id ' + $scope.noteid);
             
             $scope.doRefresh = function(){
@@ -17326,6 +17358,36 @@ angular.module('your_app_name.controllers', [])
             $scope.closeModal = function(){
                 $scope.modal.hide();
             }
+
+            $scope.sharePlainNotes = function (obj) {
+                // jQuery('.selectObservations').css('display', 'block');
+                // jQuery('#shareObs').css('display', 'none');
+                // jQuery('#cancelObs').css('display', 'block');
+                if(confirm('Are you sure you want to share all Plain Notes with the patient?')){
+                    console.log('sharing following Plain Notes with the patient');
+                    angular.forEach(obj, function(value,key){
+                        $scope.PlainNoteIds.push(value['id']);
+                    });
+                    $scope.data['noteid'] = $scope.noteid;
+                    $scope.data['rowids'] = $scope.PlainNoteIds;
+                    $scope.data['type'] = 5;
+                    console.log(JSON.stringify($scope.data));
+
+                    $http({
+                        method: 'POST',
+                        url: domain + 'doctors/share-consultation-note-details',
+                        data: JSON.stringify($scope.data)
+                    }).then(function successCallback(response) {
+                        alert(response.data.message);
+                    },function errorCallback(response){
+                        alert('there was an error encountered');
+                        console.log(response.data.message);
+                        console.log(response.data.error);
+                    });
+
+                }
+            };
+
             $scope.doRefresh();
         })
 
