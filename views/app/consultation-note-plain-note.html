@@ -25,7 +25,7 @@
         </div>
         <div class="row PlainNotesView" ng-repeat="card in plainNoteCards">
             <div class = "col greenbox card">
-                <a href={{card.attachment.host}}{{card.attachment.attachment_path}}{{card.attachment.orginial_name}} target="_blank" style="cursor:pointer">
+                <a>
 	                <td-card  id="td-card" on-transition-out="swipedAway(card.id)" style="text-align:center;">
 	                    <h4 class="cardtitle">
 	                        <span> Plain Note </span>                    
@@ -33,7 +33,7 @@
 	                    <div class="tdincard">
 	                        <p>{{card.description}}</p>
 	                        <p>
-	                        	<img style="max-height: 100px; max-width:200px" src="{{card.attachment.host}}{{card.attachment.attachment_path}}{{card.attachment.orginial_name}}" alt="image loading"/>
+	                        	<img style="max-height: 100px; max-width:200px ;cursor:pointer" src="{{card.attachment.host}}{{card.attachment.attachment_path}}{{card.attachment.orginial_name}}" alt="image loading" ng-click="openPlainNoteModal(card)"/>
 	                        </p>
 	                    </div>                
 	                </td-card>

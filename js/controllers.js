@@ -17216,12 +17216,13 @@ angular.module('your_app_name.controllers', [])
                 window.plugins.socialsharing.share(null, null, $scope.images);
             };
         })
-        .controller('ConsultationsNotesPlainNoteCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile,$timeout, $filter) {
+        .controller('ConsultationsNotesPlainNoteCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile,$timeout, $filter, $ionicModal) {
             $scope.noteid = (get('noteId') == null)? get('noteid'):get('noteId');
             $scope.fileToBeUploaded = null;
             $scope.data = {};
             $scope.data['noteid'] = $scope.noteid;
             $scope.data['description']= "";
+            $scope.selectedPlainNoteImg = "";
             console.log('plain note controller called for note id ' + $scope.noteid);
             
             $scope.doRefresh = function(){
@@ -17236,6 +17237,13 @@ angular.module('your_app_name.controllers', [])
                     console.log('error');
                 });
             }
+            
+            $ionicModal.fromTemplateUrl('plain-note-image', {
+                scope: $scope,
+            }).then(function (modal) {
+                $scope.modal = modal;
+            });
+
 
             $scope.savePlainNote = function(){
                 console.log('savePlainNote called');
@@ -17309,6 +17317,15 @@ angular.module('your_app_name.controllers', [])
                 $scope.fileToBeUploaded = element.files[0];
             }
 
+            $scope.openPlainNoteModal = function(card){
+                // console.log('hi');
+                console.log($scope.value = card.attachment.host + card.attachment.attachment_path + card.attachment.orginial_name);
+                $scope.modal.show();
+            }
+
+            $scope.closeModal = function(){
+                $scope.modal.hide();
+            }
             $scope.doRefresh();
         })
 
