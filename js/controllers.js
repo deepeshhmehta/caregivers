@@ -481,35 +481,35 @@ angular.module('your_app_name.controllers', [])
                                 historyRoot: true
                             });
                             $scope.recIds = response.records.id;
-                            var confirm = window.confirm("Do you really want to share this with patient?");
-                            if (confirm) {
-                                console.log($scope.recIds);
-                                $http({
-                                    method: 'POST',
-                                    url: domain + 'doctrsrecords/share',
-                                    params: {id: $scope.recIds, userId: $scope.userId, docId: $scope.userId, patientId: $scope.patientId, shared: 0}
-                                }).then(function successCallback(response) {
-                                    console.log(response);
-                                    if (response.data == 'Success') {
-                                        alert("Records shared successfully!");
-                                        if($scope.noteAdded){
-                                            store({noteid: $scope.noteid});
-                                            $state.go('app.consultation-note-details', {}, {reload: true});
-                                        }else{
-                                            $state.go('app.patient', {'id': $scope.patientId}, {reload: true});
-                                        }
-                                        //$state.go('app.records-view', {'id': $scope.categoryId, 'patientId': $scope.patientId, 'shared': 0}, {}, {reload: true});
-                                    }
-                                }, function errorCallback(e) {
-                                    console.log(e);
-                                });
-                            } else {
+                            // var confirm = window.confirm("Do you really want to share this with patient?");
+                            // if (confirm) {
+                            //     console.log($scope.recIds);
+                            //     $http({
+                            //         method: 'POST',
+                            //         url: domain + 'doctrsrecords/share',
+                            //         params: {id: $scope.recIds, userId: $scope.userId, docId: $scope.userId, patientId: $scope.patientId, shared: 0}
+                            //     }).then(function successCallback(response) {
+                            //         console.log(response);
+                            //         if (response.data == 'Success') {
+                            //             alert("Records shared successfully!");
+                            //             if($scope.noteAdded){
+                            //                 store({noteid: $scope.noteid});
+                            //                 $state.go('app.consultation-note-details', {}, {reload: true});
+                            //             }else{
+                            //                 $state.go('app.patient', {'id': $scope.patientId}, {reload: true});
+                            //             }
+                            //             //$state.go('app.records-view', {'id': $scope.categoryId, 'patientId': $scope.patientId, 'shared': 0}, {}, {reload: true});
+                            //         }
+                            //     }, function errorCallback(e) {
+                            //         console.log(e);
+                            //     });
+                            // } else {
 
                                 alert("Record added successfully!");
                                 $timeout(function () {
                                     $state.go('app.records-view', {'id': $scope.categoryId, 'patientId': $scope.patientId, 'shared': 0}, {}, {reload: true});
                                 }, 1000);
-                            }
+                            // }
                         } else if (response.err != '') {
                             alert('Please fill mandatory fields');
                         }
