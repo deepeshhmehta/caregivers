@@ -21,18 +21,18 @@
             <a ng-click="addPlainNotes()" class="button btn-share"><i class="icon ion-ios-plus-outline"/></a>
         </div>
         <div class="row" ng-if="plainNoteCards.length == 0">
-        	No Plain Notes to Show
+        	No Notes to Show
         </div>
         <div class="row PlainNotesView" ng-repeat="card in plainNoteCards">
             <div class = "col greenbox card">
                 <div  id="td-card" on-transition-out="swipedAway(card.id)" style="text-align:center;">
                     <h4 class="cardtitle">
-                        <span> Plain Note </span>                    
+                        <span>Note - {{$index + 1}} ({{card.created_at|dateFormat3}})</span>                    
                     </h4>
-                    <div class="tdincard">
+                    <div class="tdincard" ng-click="openPlainNoteModal(card)">
                         <p>{{card.description}}</p>
                         <p>
-                        	<img style="max-height: 100px; max-width:200px ;cursor:pointer" src="{{card.attachment.host}}{{card.attachment.attachment_path}}{{card.attachment.orginial_name}}" alt="image loading" ng-click="openPlainNoteModal(card)"/>
+                        	<img style="max-height: 100px; max-width:200px ;cursor:pointer" src="{{card.attachment.host}}{{card.attachment.attachment_path}}{{card.attachment.orginial_name}}" alt="image loading" />
                         </p>
                     </div>                
                 </div>

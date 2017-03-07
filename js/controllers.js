@@ -4637,7 +4637,7 @@ angular.module('your_app_name.controllers', [])
             }
 
             $scope.tabClicked= function(val,url){
-                
+                val = val.toLowerCase();
                 angular.forEach($scope.tabnav, function(value, key){
                     $scope.tabnav[key] = 0;
                 });
@@ -4651,6 +4651,7 @@ angular.module('your_app_name.controllers', [])
                         params: {userid: $scope.userid}
                     }).then(function successCallback(response) {
                         $scope.options = response.data;
+                        $scope.tabClicked($scope.options[0].name,$scope.options[0].url);
                         console.log($scope.options);
                     });
 
@@ -17332,7 +17333,7 @@ angular.module('your_app_name.controllers', [])
             }
             $scope.cancelPlainNoteAddPage = function(){
                 console.log('cancelPlainNoteAddPage called');
-                jQuery('.PlainNotesView').show('slow');
+                jQuery('.PlainNotesView , .footerbar').show('slow');
                 jQuery('.plainNotesAdd').hide('slow');
             }
             $scope.sharePlainNotes = function(){
@@ -17341,7 +17342,7 @@ angular.module('your_app_name.controllers', [])
             $scope.addPlainNotes = function(){
                 console.log('addPlainNotes called');
                 jQuery('.plainNotesAdd').show('slow');
-                jQuery('.PlainNotesView').hide('slow');
+                jQuery('.PlainNotesView , .footerbar').hide('slow');
             }
 
             $scope.setFile = function(element){
