@@ -17326,7 +17326,7 @@ angular.module('your_app_name.controllers', [])
                         }).then(function successCallback(response) {
                            $scope.cancelPlainNoteAddPage();
                            $scope.doRefresh();
-                           alert('added successfully');
+                           alert('Added successfully!');
                         });
                     }
                 })
@@ -17364,8 +17364,8 @@ angular.module('your_app_name.controllers', [])
                 // jQuery('.selectObservations').css('display', 'block');
                 // jQuery('#shareObs').css('display', 'none');
                 // jQuery('#cancelObs').css('display', 'block');
-                if(confirm('Are you sure you want to share all Plain Notes with the patient?')){
-                    console.log('sharing following Plain Notes with the patient');
+                if(confirm('Are you sure you want to share all Notes with the patient?')){
+                    console.log('sharing following Notes with the patient');
                     angular.forEach(obj, function(value,key){
                         $scope.PlainNoteIds.push(value['id']);
                     });
