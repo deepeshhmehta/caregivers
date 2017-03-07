@@ -17248,7 +17248,7 @@ angular.module('your_app_name.controllers', [])
                 window.plugins.socialsharing.share(null, null, $scope.images);
             };
         })
-        .controller('ConsultationsNotesPlainNoteCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile,$timeout, $filter, $ionicModal) {
+        .controller('ConsultationsNotesPlainNoteCtrl', function ($scope, $http, $stateParams, $rootScope, $state, $compile,$timeout, $filter, $ionicModal, $ionicLoading) {
             $scope.noteid = (get('noteId') == null)? get('noteid'):get('noteId');
             $scope.fileToBeUploaded = null;
             $scope.data = {};
@@ -17279,6 +17279,7 @@ angular.module('your_app_name.controllers', [])
 
 
             $scope.savePlainNote = function(){
+                $ionicLoading.show({template: 'Loading..'});
                 console.log('savePlainNote called');
                 var fd = new FormData();
                 fd.append("file", $scope.fileToBeUploaded);
@@ -17290,6 +17291,7 @@ angular.module('your_app_name.controllers', [])
                 headers: {'Content-Type': undefined}
                 }
                 ).success(function(result) {
+                    $ionicLoading.hide();
                     console.log(result);
                     var allow = true;   
                     switch(result.status){
