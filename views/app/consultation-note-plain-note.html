@@ -32,7 +32,8 @@
                     <div class="tdincard" ng-click="openPlainNoteModal(card)">
                         <p>{{card.description}}</p>
                         <p>
-                        	<img style="max-height: 100px; max-width:200px ;cursor:pointer" src="{{card.attachment.host}}{{card.attachment.attachment_path}}{{card.attachment.orginial_name}}" alt="image loading" />
+                            <span ng-if="card.attachment.host == ' '">No image to display</span>
+                        	<img ng-if="card.attachment.host != ' '" style="max-height: 100px; max-width:200px ;cursor:pointer" src="{{card.attachment.host}}{{card.attachment.attachment_path}}{{card.attachment.orginial_name}}" alt="image loading" />
                         </p>
                     </div>                
                 </div>

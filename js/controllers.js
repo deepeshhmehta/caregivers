@@ -17361,7 +17361,9 @@ angular.module('your_app_name.controllers', [])
             $scope.openPlainNoteModal = function(card){
                 // console.log('hi');
                 console.log($scope.value = card.attachment.host + card.attachment.attachment_path + card.attachment.orginial_name);
-                $scope.modal.show();
+                if(card.attachment.host != ' '){
+                    $scope.modal.show();
+                }
             }
 
             $scope.closeModal = function(){
