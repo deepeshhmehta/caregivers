@@ -6,7 +6,7 @@
           </textarea>
         </label>
     	<label class="item item-input listreq">
-	        <input type="file" placeholder="{{field.field}}" onchange="angular.element(this).scope().setFile(this)" name="{{field.name}}"/>
+	        <input type="file" placeholder="{{field.field}}" onchange="angular.element(this).scope().setFile(this)" name="{{field.name}}" id="fileToBeUploaded"/>
 	        <label for="attachfile"></label>
 	    </label>                                     
     	<button ng-click="savePlainNote()" class="button button-positive button-block">Add</button>

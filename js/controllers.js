@@ -17313,6 +17313,10 @@ angular.module('your_app_name.controllers', [])
 
                             break;
                         }
+                        case 3:{
+                            alert(result.message);
+                            allow = false;
+                        }
                         default:  {
                             alert('unknown error');
                             allow = false;
@@ -17334,6 +17338,8 @@ angular.module('your_app_name.controllers', [])
                 })
             }
             $scope.cancelPlainNoteAddPage = function(){
+                document.getElementById("fileToBeUploaded").value = "";
+                $scope.data['description'] = "";
                 console.log('cancelPlainNoteAddPage called');
                 jQuery('.PlainNotesView , .footerbar').show('slow');
                 jQuery('.plainNotesAdd').hide('slow');
