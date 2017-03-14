@@ -7,7 +7,7 @@
         <my-tab title="Created by you ({{totalCreateByYou}})" ng-click="subpage('createdbyu')"> 
             <!--  ng-click="subpage('createdbyu')"  -->
             <div class="tabcontainer" >
-                <p ng-if="records.length == 0">No record(s) found.</p>
+                <p ng-if="allCatsCreateByYou.length == 0">No record(s) found.</p>
             </div> 
 
             <div ng-repeat="cat in allCatsCreateByYou" ng-if="$index % 3 == 0" class="row" width="99%">
@@ -43,7 +43,7 @@
         <my-tab title="Shared with you ({{totalSharedWithYou}})" ng-click="subpage('createdbyu')"> 
             <!--  ng-click="subpage('createdbyu')"  -->
             <div class="tabcontainer" >
-                <p ng-if="records.length == 0">No record(s) found.</p>
+                <p ng-if="allCatsSharedWithYou.length == 0">No record(s) found.</p>
             </div> 
 
             <div ng-repeat="cat in allCatsSharedWithYou" ng-if="$index % 3 == 0" class="row" width="99%">
