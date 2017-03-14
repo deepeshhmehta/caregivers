@@ -1,7 +1,7 @@
 <div>
     <my-tabs class="ctabs">
         <my-tab title="Active">
-            <div class="mtabcon" ng-controller="DoctorConsultationsActiveCtrl">
+            <div class="mtabcon" ng-controller="DoctorConsultationsPatientActiveCtrl">
                 <div class="tabcontainer p0">
                     <h4 class="txt-center"> {{all_data.length==0? 'No appointments': ''}}</h4>
                     <div class="posts-list"  ><!---->
@@ -29,14 +29,22 @@
                                                 <span class="icon ion-eye"></span> View Medicine
                                             </a>
                                         </div>
-                                        <div class="col txt-center" ng-if="app.all_note.length > 0">
-                                            <a class="btn crdview-plus" ng-click="previewNote(app.all_note[0].id, app.app.id)">
-                                                <span class="icon ion-eye"></span> View Note
-                                            </a>
+                                        <div ng-if="0">
+                                            <div class="col txt-center" ng-if="app.all_note.length > 0">
+                                                <a class="btn crdview-plus" ng-click="previewNote(app.all_note[0].id, app.app.id)">
+                                                    <span class="icon ion-eye"></span> View Note
+                                                </a>
+                                            </div>
+                                            <div class="col txt-center" ng-if="app.all_note.length == 0">
+                                                <a ng-click="addCnote(app.app.id, 'act')" class="btn crdview-plus">
+                                                    <span class="icon ion-plus-circled"></span> Note
+                                                </a>
+                                            </div>
                                         </div>
-                                        <div class="col txt-center" ng-if="app.all_note.length == 0">
-                                            <a ng-click="addCnote(app.app.id, 'act')" class="btn crdview-plus">
-                                                <span class="icon ion-plus-circled"></span> Note
+                                        <div class="col txt-center">
+                                            <a ng-click="addConsultationNote(app.app.id)" class="btn crdview-plus">
+                                                <span class="icon ion-plus-circled" ng-if="app.all_note.length == 0" ></span>
+                                                <span class="icon ion-eye" ng-if="app.all_note.length > 0"></span>Notes
                                             </a>
                                         </div>
                                     </div>
@@ -59,7 +67,7 @@
                                             <a ng-if="app.app.status != 0" class="cbtn conduct">Conduct</a>
                                         </div>
                                     </div>
-                                    <!-------- ng-if="curTime >= all_time[$index] && curTime <= all_end_time[$index]" ui-sref="app.doctor-join({'id': app.id, 'res': 'json'})"   -->
+                                    <!-- ng-if="curTime >= all_time[$index] && curTime <= all_end_time[$index]" ui-sref="app.doctor-join({'id': app.id, 'res': 'json'})"   -->
                                 </div>
                             </div>
                         </div>
@@ -68,7 +76,7 @@
             </div>
         </my-tab>
         <my-tab title="Past">
-            <div class="mtabcon" ng-controller="DoctorConsultationsPastCtrl">
+            <div class="mtabcon" ng-controller="DoctorConsultationsPatientPastCtrl">
                 <div class="clr"></div>
                 <div class="tabcontainer p0">
                     <h4 class="txt-center"> {{all_past_data.length==0? 'No appointments': ''}}</h4>
@@ -95,15 +103,23 @@
                                                 <span class="icon ion-plus-circled"></span>View Medicine
                                             </a>
                                         </div>
-                                        <div class="col txt-center" ng-if="app.all_note_past.length > 0">
-                                            <span class="btn crdview" ng-click="previewNote(app.all_note_past[0].id, app.app.id)">
-                                                <span class="icon ion-plus-circled"></span>View Note
-                                            </span>
+                                        <div ng-if="0">
+                                            <div class="col txt-center" ng-if="app.all_note_past.length > 0">
+                                                <span class="btn crdview" ng-click="previewNote(app.all_note_past[0].id, app.app.id)">
+                                                    <span class="icon ion-plus-circled"></span>View Note
+                                                </span>
+                                            </div>
+                                            <div class="col txt-center" ng-if="app.all_note_past.length == 0">
+                                                <span class="btn crdview-plus" ng-click="addCnote(app.app.id)">
+                                                    <span class="icon ion-plus-circled"></span> Note
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div class="col txt-center" ng-if="app.all_note_past.length == 0">
-                                            <span class="btn crdview-plus" ng-click="addCnote(app.app.id)">
-                                                <span class="icon ion-plus-circled"></span> Note
-                                            </span>
+                                        <div class="col txt-center">
+                                            <a ng-click="addConsultationNote(app.app.id)" class="btn crdview-plus">
+                                                <span class="icon ion-plus-circled" ng-if="app.all_note_past.length == 0" ></span>
+                                                <span class="icon ion-eye" ng-if="app.all_note_past.length > 0"></span>Notes
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="clr"></div>

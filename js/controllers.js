@@ -12030,11 +12030,11 @@ angular.module('your_app_name.controllers', [])
                 $state.go("app.cnote", {'appId': appId}, {reload: true});
             };
             //Go to consultation view page
-//            $scope.viewNote = function (noteId) {
-//                //alert(appId);
-//                store({'noteId': noteId, 'from': 'app.consultation-past'});
-//                $state.go("app.view-note", {'id': noteId}, {reload: true});
-//            };
+           // $scope.viewNote = function (noteId) {
+           //     //alert(appId);
+           //     store({'noteId': noteId, 'from': 'app.consultation-past'});
+           //     $state.go("app.view-note", {'id': noteId}, {reload: true});
+           // };
             $scope.viewNote = function (noteId, appId) {
                 //alert(appId);
                 //store({'noteId': noteId});
@@ -17316,6 +17316,7 @@ angular.module('your_app_name.controllers', [])
                         case 3:{
                             alert(result.message);
                             allow = false;
+                            break;
                         }
                         default:  {
                             alert('unknown error');
@@ -17400,6 +17401,456 @@ angular.module('your_app_name.controllers', [])
             };
 
             $scope.doRefresh();
+        })
+
+        .controller('DoctorConsultationsPatientActiveCtrl', function ($scope, $http, $ionicModal, $stateParams, $filter, $ionicPopup, $timeout, $ionicHistory, $filter, $state, $ionicFilterBar, $ionicLoading) {
+            $ionicLoading.show({template: 'Loading..'});
+            $scope.drId = get('id');
+            $scope.userId = get('id');
+            $scope.interface = get('interface_id');
+            $scope.curTime = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
+            $scope.showUpdateStatus = function(val){
+                console.log('status update initiated');
+                
+                $ionicModal.fromTemplateUrl('update-status', {
+                    scope: $scope
+                }).then(function (modal) {
+                    console.log(val.app.id);
+                    $scope.statusChanged = function(value){
+                        $http({
+                                    method: 'GET',
+                                    url: domain + 'appointment/update-clinic-appointment-status',
+                                    params: {apptId: val.app.id, status: value}
+                                }).then(function successCallback(response) {
+                                    modal.hide();
+                                    $state.go('app.doctor-consultations', {}, {reload: true});
+                                });
+                    }
+                    $scope.modal = modal;
+                    modal.show();
+                });
+            }
+            $scope.doRefresh = function () {
+                console.log("jskhfksjdf");
+                $http({
+                    method: 'GET',
+                    url: domain + 'appointment/get-patient-active-details',
+                    params: {id: $scope.drId,patientid : get('patientId')}
+                }).then(function successCallback(response) {
+                    console.log(response.data);
+                    $scope.todays_data = response.data.todays_data;
+                    $scope.todays_app = response.data.todays_appointments;
+                    $scope.todays_usersData = response.data.todays_usersData;
+                    $scope.todays_products = response.data.todays_products;
+                    $scope.todays_time = response.data.todays_time;
+                    $scope.todays_end_time = response.data.todays_end_time;
+                    $scope.todays_note = response.data.todays_note;
+                    $scope.todays_medicine = response.data.todays_medicine;
+                    $scope.week_data = response.data.week_data;
+                    $scope.week_app = response.data.week_appointments;
+                    $scope.week_usersData = response.data.week_usersData;
+                    $scope.week_products = response.data.week_products;
+                    $scope.week_time = response.data.week_time;
+                    $scope.week_end_time = response.data.week_end_time;
+                    $scope.week_note = response.data.week_note;
+                    $scope.week_medicine = response.data.week_medicine;
+                    $scope.all_data = response.data.all_data;
+                    $scope.all_app = response.data.all_appointments;
+                    $scope.all_usersData = response.data.all_usersData;
+                    $scope.all_products = response.data.all_products;
+                    $scope.all_time = response.data.all_time;
+                    $scope.all_end_time = response.data.all_end_time;
+                    $scope.all_note = response.data.all_note;
+                    $scope.all_medicine = response.data.all_medicine;
+                    $scope.timeLimit = response.data.timelimit.cancellation_time;
+                    $ionicLoading.hide();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, function errorCallback(e) {
+                    $scope.$broadcast('scroll.refreshComplete');
+                })
+
+            };
+
+            $http({
+                method: 'GET',
+                url: domain + 'appointment/get-patient-active-details',
+                params: {id: $scope.drId,patientid : get('patientId')}
+            }).then(function successCallback(response) {
+                console.log(response.data);
+                $scope.joinPage = response.data.join;
+                $scope.todays_data = response.data.todays_data;
+                $scope.todays_app = response.data.todays_appointments;
+                $scope.todays_usersData = response.data.todays_usersData;
+                $scope.todays_products = response.data.todays_products;
+                $scope.todays_time = response.data.todays_time;
+                $scope.todays_end_time = response.data.todays_end_time;
+                $scope.todays_note = response.data.todays_note;
+                $scope.todays_medicine = response.data.todays_medicine;
+                $scope.week_data = response.data.week_data;
+                $scope.week_app = response.data.week_appointments;
+                $scope.week_usersData = response.data.week_usersData;
+                $scope.week_products = response.data.week_products;
+                $scope.week_time = response.data.week_time;
+                $scope.week_end_time = response.data.week_end_time;
+                $scope.week_note = response.data.week_note;
+                $scope.week_medicine = response.data.week_medicine;
+                $scope.all_data = response.data.all_data;
+                $scope.all_app = response.data.all_appointments;
+                $scope.all_usersData = response.data.all_usersData;
+                $scope.all_products = response.data.all_products;
+                $scope.all_time = response.data.all_time;
+                $scope.all_end_time = response.data.all_end_time;
+                $scope.all_note = response.data.all_note;
+                $scope.all_medicine = response.data.all_medicine;
+                $scope.timeLimit = response.data.timelimit.cancellation_time;
+                $ionicLoading.hide();
+            }, function errorCallback(e) {
+                console.log(e);
+            });
+            /* search plugin */
+            var filterBarInstance;
+            $scope.showFilterBar = function () {
+                filterBarInstance = $ionicFilterBar.show({
+                    items: $scope.items,
+                    update: function (filteredItems, filterText) {
+                        $scope.items = filteredItems;
+                        if (filterText) {
+                            //console.log(filterText);
+                            $scope.filterall = filterText
+                        } else {
+                            $scope.filterall = '';
+                        }
+                    }
+                });
+            };
+            $scope.refreshItems = function () {
+                if (filterBarInstance) {
+                    filterBarInstance();
+                    filterBarInstance = null;
+                }
+
+                $timeout(function () {
+                    //getItems();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            /* end of search plugin */
+
+            $scope.approveAppointment = function (appId, prodId, mode, startTime, endTime) {
+                $http({
+                    method: 'GET',
+                    url: domain + 'doctorsapp/dr-approve-app',
+                    params: {appId: appId, prodId: prodId, userId: $scope.userId, interface: $scope.interface}
+                }).then(function successCallback(response) {
+                    console.log(response.data);
+                    if (response.data.update_status == 'success') {
+                        alert('Your appointment is approved successfully.');
+                        $state.go('app.doctor-consultations', {}, {reload: true});
+                    } else if (response.data.update_status == 'fail') {
+                        alert('Sorry, appointment can not booked at supersaas. Please reject it.');
+                    }
+                    //$state.go('app.doctor-consultations', {}, {reload: true});
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+            };
+            $scope.rejectAppointment = function (appId, prodId, mode, startTime, endTime) {
+                $http({
+                    method: 'GET',
+                    url: domain + 'doctorsapp/dr-reject-app',
+                    params: {appId: appId, prodId: prodId, userId: $scope.userId}
+                }).then(function successCallback(response) {
+                    console.log(response.data);
+                    if (response.data == 1) {
+                        alert('Your appointment is rejected successfully.');
+                        $state.go('app.doctor-consultations', {}, {reload: true});
+                    }
+                    //$state.go('app.doctor-consultations', {}, {reload: true});
+                }, function errorCallback(response) {
+                    console.log(response);
+                });
+            };
+            $scope.cancelAppointment = function (appId, drId, mode, startTime) {
+                $scope.appId = appId;
+                $scope.userId = get('id');
+                $scope.cancel = '';
+                console.log(startTime);
+                var curtime = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
+                console.log(curtime);
+                var timeDiff = getTimeDiff(startTime, curtime);
+                console.log(timeDiff + " Time limit==" + $scope.timeLimit);
+                if (timeDiff < $scope.timeLimit) {
+                    if (mode == 1) {
+                        alert("Appointment can not be cancelled now!");
+                    }
+                } else {
+                    if (mode == 1) {
+                        // alert("Video cancel");
+                        $http({
+                            method: 'GET',
+                            url: domain + 'appointment/dr-cancel-app',
+                            params: {appId: $scope.appId, prodId: $scope.prodid, userId: $scope.userId, cancel: ''}
+                        }).then(function successCallback(response) {
+                            console.log(response.data);
+                            if (response.data == 'success') {
+                                alert('Your appointment is cancelled successfully.');
+                                $state.go('app.doctor-consultations', {}, {reload: true});
+                            } else {
+                                alert('Sorry your appointment is not cancelled.');
+                            }
+                            $state.go('app.consultations-list', {}, {reload: true});
+                        }, function errorCallback(response) {
+                            console.log(response);
+                        });
+                    }
+                }
+            };
+            $scope.joinVideo = function (mode, start, end, appId) {
+                console.log(mode + "===" + start + '===' + end + "===" + $scope.curTime + "==" + appId);
+                if ($scope.curTime >= start || $scope.curTime <= end) {
+                    console.log('redirect');
+                    //$state.go('app.patient-join', {}, {reload: true});
+                    $state.go($scope.joinPage.url, {'id': appId});
+                } else {
+                    alert("You can join video before 15 minutes.");
+                }
+            };
+            //new consultation notes
+            $scope.addConsultationNote = function(appointmentid){
+                console.log(appointmentid);
+                $http({
+                            method: 'GET',
+                            url: domain + 'doctors/createnewnote-check-if-existing',
+                            params: {doctorid: $scope.userId, patientid: $scope.patientId,appointment_id: appointmentid},
+                        }).then(function successCallback(response) {
+                            //console.log(response.data);
+                            store({noteId: response.data.noteid}); //noteid
+                            $state.go('app.consultation-note-details', {}, {reload: true});
+                        });
+            }
+            //Go to consultation add page
+            $scope.addCnote = function (appId, from) {
+                //alert(appId);
+                store({'appId': appId});
+                if (from == 'act')
+                    store({'from': 'app.doctor-consultations'});
+                else if (from == 'past')
+                    store({'from': 'app.consultation-past'});
+                $state.go("app.cnote", {'appId': appId}, {reload: true});
+            };
+            //Go to consultation view page
+            $scope.viewNote = function (noteId, appId) {
+                //alert(appId);
+                //store({'noteId': noteId});
+                store({'noteId': noteId, 'from': 'app.doctor-consultations'});
+                $state.go("app.preview-note", {'id': noteId, 'appId': appId}, {reload: true});
+                //$state.go("app.view-note", {'id': noteId}, {reload: true});
+            };
+            $scope.viewMedicine = function (consultationId) {
+                //alert(noteId);
+                // store({'noteId': noteId});
+                $state.go("app.view-medicine", {'id': consultationId}, {reload: true});
+            };
+        })
+
+        .controller('DoctorConsultationsPatientPastCtrl', function ($scope, $http, $stateParams, $filter, $ionicPopup, $timeout, $ionicHistory, $filter, $state, $ionicFilterBar, $ionicLoading) {
+            $ionicLoading.show({template: 'Loading..'});
+            unset(['backurl', 'recId', 'appId']);
+            $scope.drId = get('id');
+            $scope.userId = get('id');
+            $scope.curTime = $filter('date')(new Date(), 'yyyy-MM-dd HH:mm:ss');
+            $scope.doRefresh = function () {
+                console.log("jskhfksjdf");
+                $http({
+                    method: 'GET',
+                    url: domain + 'appointment/get-patient-past-details',
+                    params: {id: $scope.drId,patientid : get('patientId')}
+                }).then(function successCallback(response) {
+                    console.log(response.data);
+                    //past section
+                    $scope.todays_app_past = response.data.todays_appointments_past;
+                    $scope.todays_usersData_past = response.data.todays_usersData_past;
+                    $scope.todays_products_past = response.data.todays_products_past;
+                    $scope.todays_time_past = response.data.todays_time_past;
+                    $scope.todays_end_time_past = response.data.todays_end_time_past;
+                    $scope.todays_note_past = response.data.todays_note_past;
+                    $scope.todays_medicine_past = response.data.todays_medicine_past;
+                    $scope.todays_past_data = response.data.todays_past_data;
+                    // end past section //
+
+                    //past section 
+                    $scope.week_app_past = response.data.week_appointments_past;
+                    $scope.week_usersData_past = response.data.week_usersData_past;
+                    $scope.week_products_past = response.data.week_products_past;
+                    $scope.week_time_past = response.data.week_time_past;
+                    $scope.week_end_time_past = response.data.week_end_time_past;
+                    $scope.week_note_past = response.data.week_note_past;
+                    $scope.week_medicine_past = response.data.week_medicine_past;
+                    $scope.week_past_data = response.data.week_past_data;
+                    //end past section
+
+                    //past section //
+                    $scope.all_app_past = response.data.all_appointments_past;
+                    $scope.all_usersData_past = response.data.all_usersData_past;
+                    $scope.all_products_past = response.data.all_products_past;
+                    $scope.all_time_past = response.data.all_time_past;
+                    $scope.all_end_time_past = response.data.all_end_time_past;
+                    $scope.all_note_past = response.data.all_note_past;
+                    $scope.all_medicine_past = response.data.all_medicine_past;
+                    $scope.all_past_data = response.data.all_past_data;
+                    ;
+                    $ionicLoading.hide();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, function errorCallback(e) {
+                    $scope.$broadcast('scroll.refreshComplete');
+                })
+
+            };
+            $http({
+                method: 'GET',
+                url: domain + 'appointment/get-patient-past-details',
+                params: {id: $scope.drId,patientid : get('patientId')}
+            }).then(function successCallback(response) {
+                console.log(response.data);
+                //past section
+                $scope.todays_app_past = response.data.todays_appointments_past;
+                $scope.todays_usersData_past = response.data.todays_usersData_past;
+                $scope.todays_products_past = response.data.todays_products_past;
+                $scope.todays_time_past = response.data.todays_time_past;
+                $scope.todays_end_time_past = response.data.todays_end_time_past;
+                $scope.todays_note_past = response.data.todays_note_past;
+                $scope.todays_medicine_past = response.data.todays_medicine_past;
+                $scope.todays_past_data = response.data.todays_past_data;
+                // end past section //
+
+                //past section 
+                $scope.week_app_past = response.data.week_appointments_past;
+                $scope.week_usersData_past = response.data.week_usersData_past;
+                $scope.week_products_past = response.data.week_products_past;
+                $scope.week_time_past = response.data.week_time_past;
+                $scope.week_end_time_past = response.data.week_end_time_past;
+                $scope.week_note_past = response.data.week_note_past;
+                $scope.week_medicine_past = response.data.week_medicine_past;
+                $scope.week_past_data = response.data.week_past_data;
+                //end past section
+
+                //past section //
+                $scope.all_app_past = response.data.all_appointments_past;
+                $scope.all_usersData_past = response.data.all_usersData_past;
+                $scope.all_products_past = response.data.all_products_past;
+                $scope.all_time_past = response.data.all_time_past;
+                $scope.all_end_time_past = response.data.all_end_time_past;
+                $scope.all_note_past = response.data.all_note_past;
+                $scope.all_medicine_past = response.data.all_medicine_past;
+                $scope.all_past_data = response.data.all_past_data;
+                $ionicLoading.hide();
+                //end past section//
+            }, function errorCallback(e) {
+                console.log(e);
+            });
+            $scope.DisplayToday = 2;
+            $scope.Itemtoday = function (done) {
+                if ($scope.todays_past_data.length > $scope.DisplayToday) {
+                    console.log('Todays');
+                    $scope.DisplayToday += 2; // load number of more items
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            };
+            $scope.itemsDisplayall = 2;
+            $scope.addMoreItemall = function (done) {
+                if ($scope.all_app_past.length > $scope.itemsDisplayall) {
+                    $scope.itemsDisplayall += 2; // load number of more items
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            };
+            $scope.Displaythisweek = 2;
+            $scope.Itemthisweek = function (done) {
+                if ($scope.week_past_data.length > $scope.Displaythisweek) {
+                    console.log('week');
+                    $scope.Displaythisweek += 2; // load number of more items
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            };
+
+            /* search plugin */
+            var filterBarInstance;
+            $scope.showFilterBar = function () {
+                filterBarInstance = $ionicFilterBar.show({
+                    items: $scope.items,
+                    update: function (filteredItems, filterText) {
+                        $scope.items = filteredItems;
+                        if (filterText) {
+                            //console.log(filterText);
+                            $scope.filterall = filterText
+                        } else {
+                            $scope.filterall = '';
+                        }
+                    }
+                });
+            };
+            $scope.refreshItems = function () {
+                if (filterBarInstance) {
+                    filterBarInstance();
+                    filterBarInstance = null;
+                }
+
+                $timeout(function () {
+                    //getItems();
+                    $scope.$broadcast('scroll.refreshComplete');
+                }, 1000);
+            };
+            /* end of search plugin */
+            $scope.joinVideo = function (mode, start, end, appId) {
+                console.log(mode + "===" + start + '===' + end + "===" + $scope.curTime + "==" + appId);
+                if ($scope.curTime >= start || $scope.curTime <= end) {
+                    console.log('redirect');
+                    //$state.go('app.patient-join', {}, {reload: true});
+                    $state.go('app.doctor-join', {'id': appId, 'mode': mode}, {reload: true});
+                } else {
+                    alert("You can join video before 15 minutes.");
+                }
+            };
+            //Consultation Notes New
+            $scope.addConsultationNote = function(appointmentid){
+                console.log(appointmentid);
+                $http({
+                            method: 'GET',
+                            url: domain + 'doctors/createnewnote-check-if-existing',
+                            params: {doctorid: $scope.userId, patientid: $scope.patientId,appointment_id: appointmentid},
+                        }).then(function successCallback(response) {
+                            //console.log(response.data);
+                            store({noteId: response.data.noteid}); //noteid
+                            $state.go('app.consultation-note-details', {}, {reload: true});
+                        });
+            }
+            //Go to consultation add page
+            $scope.addCnote = function (appId, from) {
+                //alert(appId);
+                store({'appId': appId});
+                if (from == 'act')
+                    store({'from': 'app.doctor-consultations'});
+                else if (from == 'past')
+                    store({'from': 'app.consultation-past'});
+                $state.go("app.cnote", {'appId': appId}, {reload: true});
+            };
+            //Go to consultation view page
+           // $scope.viewNote = function (noteId) {
+           //     //alert(appId);
+           //     store({'noteId': noteId, 'from': 'app.consultation-past'});
+           //     $state.go("app.view-note", {'id': noteId}, {reload: true});
+           // };
+            $scope.viewNote = function (noteId, appId) {
+                //alert(appId);
+                //store({'noteId': noteId});
+                store({'noteId': noteId});
+                $state.go("app.preview-note", {'id': noteId, 'appId': appId}, {reload: true});
+                //$state.go("app.view-note", {'id': noteId}, {reload: true});
+            };
+            $scope.viewMedicine = function (consultationId) {
+                //alert(noteId);
+                // store({'noteId': noteId});
+                $state.go("app.view-medicine", {'id': consultationId}, {reload: true});
+            };
         })
 
         ;
