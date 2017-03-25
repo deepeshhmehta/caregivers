@@ -1517,9 +1517,12 @@ angular.module('your_app_name.controllers', [])
                     method: 'GET',
                     url: domain + 'get-pharmacy-allow',
                     params: {record_id: $stateParams.id,interface_id: $scope.interface}
-                }).then(function successCallback(response) {                    
+                }).then(function successCallback(response) {  
+                console.log(response);                  
                     if(2575 == window.localStorage.getItem('id') && response.data == 1){                        
                         jQuery(".ordercart").show();
+                    }else{
+                        jQuery(".ordercart").hide();
                     }
                 });                
           
@@ -7128,11 +7131,13 @@ angular.module('your_app_name.controllers', [])
 
         .controller('ViewContentCtrl', function ($scope, $state, $http, $stateParams, $ionicModal, $filter, $sce, $ionicLoading) {
             $ionicLoading.show({template: 'Loading..'});
+            $scope.userId = get('id');
+            $scope.interface = get('interface_id');
             $scope.contentId = $stateParams.id;
             $http({
                 method: 'GET',
                 url: domain + 'contentlibrary/get-content-value',
-                params: {conId: $scope.contentId}
+                params: {conId: $scope.contentId, userid: $scope.userId, interface: $scope.interface}
             }).then(function sucessCallback(response) {
                 $ionicLoading.hide();
                 console.log(response.data);
