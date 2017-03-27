@@ -24,7 +24,7 @@
                     {{cval.content_desc}}
                 </p>
 
-                <div ng-if="cval.content_type == 'artcle'">
+                <div ng-if="cval.content_type == 'aritcle'">
                     <p class="imgincard pb10" ng-if="cval.header_img != ''" >  <img src="{{attachpath}}{{cval.header_img}}" /></p>
                 </div>  
                 <div  class="framecontainer mb10"  ng-if="(cval.content_type == 'video')&&(cval.source =='ugc')"> 
@@ -54,7 +54,7 @@
         </div>
 
     </ion-content>
-    <ion-footer-bar class="post-footer bar bar-footer" ng-if="cval.content_type == 'artcle'">
+    <ion-footer-bar class="post-footer bar bar-footer" ng-if="cval.content_type == 'article'">
         <div class="row" > 
             <div class="col col-20 col-center">
                 <a class="button button-icon icon icon-right ion-plus" bigger-text=".post-view .post-text">A</a>
